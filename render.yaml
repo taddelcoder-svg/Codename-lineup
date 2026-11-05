@@ -1,0 +1,6 @@
+# Render-Blueprint: statische Seite, kein Build nötig.
+services:
+  - type: web
+    name: codename-lineup
+    runtime: static
+    staticPublishPath: .
