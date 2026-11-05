@@ -1,0 +1,10 @@
+{
+  "name": "codename-lineup",
+  "private": true,
+  "description": "Codename: Lineup – Agenten-Survivor im Comic-Stil",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo kein Build nötig"
+  },
+  "engines": { "node": ">=18" }
+}

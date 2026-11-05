@@ -6,7 +6,7 @@ Acht Agenten aus Crazy Lineup, jeweils mit eigener Waffe, Eigenschaft und Ulti.
 
 - Steuerung: WASD / Pfeiltasten oder Finger ziehen, Ulti mit Leertaste oder ULTI-Knopf
 - Alles steckt in `index.html`, ohne Build und ohne Abhängigkeiten
-- Hosting: statische Seite (siehe `render.yaml`)
+- Hosting: Render Web Service mit `node server.js` (siehe `render.yaml`), Koop folgt
 - Rangliste: meldet sich über `melder.js` unter dem Namen „Codename Lineup“
 
 Schrift: Bricolage Grotesque (SIL OFL 1.1, siehe `fonts/OFL-Bricolage.txt`).

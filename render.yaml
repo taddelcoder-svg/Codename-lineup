@@ -1,6 +1,10 @@
-# Render-Blueprint: statische Seite, kein Build nötig.
+# Render-Blueprint: Web Service mit kleinem Node-Server (keine Abhängigkeiten, kein Build).
+# Liefert das Spiel aus; später kommt hier der Koop per WebSocket dazu.
 services:
   - type: web
     name: codename-lineup
-    runtime: static
-    staticPublishPath: .
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: node server.js
+    healthCheckPath: /healthz
