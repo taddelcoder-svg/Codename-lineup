@@ -90,7 +90,7 @@ const raeume = new Map();
 const MAX_SPIELER = 4;
 const AGENTEN = ['matteo', 'timo', 'omar', 'julian', 'felix', 'mo', 'damon', 'sinan'];
 
-function neuerClient(sock) { const c = { id: naechsteId++, sock, name: 'Agent', agent: 'matteo', up: {}, rank: 1, raum: null, lebt: true, offen: true }; clients.add(c); return c; }
+function neuerClient(sock) { const c = { id: naechsteId++, sock, name: 'Agent', agent: 'matteo', skin: '', up: {}, rank: 1, raum: null, lebt: true, offen: true }; clients.add(c); return c; }
 function senden(c, o) { if (!c.offen) return; try { c.sock.write(rahmen(1, Buffer.from(JSON.stringify(o)))); } catch (e) {} }
 function sauber(t, n) { return String(t || '').replace(/[<>&"]/g, '').trim().slice(0, n) || 'Agent'; }
 function upVon(u) {
@@ -101,6 +101,7 @@ function upVon(u) {
 function profil(c, o) {
   c.name = sauber(o.name, 16);
   c.agent = AGENTEN.indexOf(o.agent) >= 0 ? o.agent : 'matteo';
+  c.skin = /^[a-z]{1,12}$/.test(o.skin || '') ? o.skin : '';
   c.up = upVon(o.up);
   c.rank = Math.max(1, Math.min(200, Math.round(+o.rank || 1)));
 }
@@ -109,7 +110,7 @@ function code() {
   for (;;) { let s = ''; for (let i = 0; i < 4; i++) s += z[Math.floor(Math.random() * z.length)]; if (!raeume.has(s)) return s; }
 }
 function lobby(r) {
-  const o = { t: 'lobby', code: r.code, host: r.host.id, laeuft: r.laeuft, mission: r.mission, spieler: r.spieler.map((c) => ({ id: c.id, name: c.name, agent: c.agent })) };
+  const o = { t: 'lobby', code: r.code, host: r.host.id, laeuft: r.laeuft, mission: r.mission, spieler: r.spieler.map((c) => ({ id: c.id, name: c.name, agent: c.agent, skin: c.skin })) };
   r.spieler.forEach((c) => senden(c, o));
 }
 function verlassen(c) {
@@ -160,7 +161,7 @@ function nachricht(c, o) {
       r.laeuft = true;
       r.mission = Math.max(1, Math.min(999, Math.round(+o.mission || r.mission || 1)));
       const seed = Math.floor(Math.random() * 1e9);
-      const spieler = r.spieler.map((x) => ({ id: x.id, name: x.name, agent: x.agent, up: x.up, rank: x.rank }));
+      const spieler = r.spieler.map((x) => ({ id: x.id, name: x.name, agent: x.agent, skin: x.skin, up: x.up, rank: x.rank }));
       r.spieler.forEach((x) => senden(x, { t: 'start', mission: r.mission, seed, host: r.host.id, spieler }));
       lobby(r);
       break;

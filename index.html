@@ -98,6 +98,32 @@
   #kofferToast { position: fixed; left: 50%; bottom: max(120px, env(safe-area-inset-bottom)); transform: translateX(-50%); pointer-events: none; text-align: center; animation: pop .35s cubic-bezier(.2,1.6,.4,1); }
   #kofferToast .panel { width: auto; padding: 8px 14px; }
   #lvlWarten { color: #fff; font-weight: 800; font-size: 1.2rem; -webkit-text-stroke: 1.5px #111; paint-order: stroke fill; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; width: 100%; }
+  .tab { position: relative; min-height: 46px; padding: 0 14px; border: 3px solid #111; border-radius: 10px; background: #fff; font-weight: 800; box-shadow: 3px 3px 0 #111; }
+  .tab[aria-selected="true"] { background: #111; color: #ffd23f; transform: translateY(-2px); }
+  .tab .punkt { position: absolute; top: -9px; right: -9px; min-width: 22px; height: 22px; border-radius: 11px; background: #e02020; color: #fff; border: 2px solid #111; font-size: .78rem; line-height: 18px; padding: 0 4px; }
+  .seite { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .stufen { display: flex; gap: 8px; overflow-x: auto; width: 100%; padding: 8px 4px 12px; scroll-snap-type: x proximity; }
+  .stufe { flex: none; width: 88px; scroll-snap-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px; border: 3px solid #111; border-radius: 10px; background: #fff; font-weight: 800; box-shadow: 3px 3px 0 #111; }
+  .stufe .e { font-size: 1.8rem; line-height: 1.2; } .stufe img { width: 48px; height: 48px; }
+  .stufe small { font-size: .72rem; font-weight: 700; }
+  .stufe.zu { opacity: .55; filter: grayscale(.6); }
+  .stufe.frei { background: #fff6c9; animation: puls .6s ease-in-out infinite alternate; cursor: pointer; }
+  .stufe.weg { background: #e6f7e9; }
+  .auftrag { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; text-align: left; padding: 10px 0; border-top: 2px dashed #ccc; }
+  .auftrag:first-child { border-top: 0; }
+  .auftrag .bar { height: 12px; box-shadow: none; grid-column: 1; } .auftrag .bar i { background: repeating-linear-gradient(-45deg, #3ad84a 0 8px, #1fa82e 8px 16px); }
+  .auftrag small { color: #555; }
+  .garderobe { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; width: 100%; }
+  .skin { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px; border: 3px solid #111; border-radius: 12px; background: #fff; box-shadow: 4px 4px 0 #111; font-weight: 800; font-size: .9rem; }
+  .skin img { width: 80px; height: 80px; background: radial-gradient(circle, rgba(0,0,0,.1) 2px, transparent 2.6px) 0 0/8px 8px; border-radius: 8px; }
+  .skin small { font-size: .72rem; color: #fff; border: 2px solid #111; border-radius: 6px; padding: 0 5px; background: var(--r); }
+  .skin.zu img { filter: brightness(0) opacity(.5); }
+  .skin.an { outline: 4px solid #3ad84a; outline-offset: -8px; }
+  #kisteAuf .karte { width: min(280px, 90%); padding: 16px; border: 5px solid #111; border-radius: 16px; box-shadow: 8px 8px 0 #111; background: var(--r); color: #fff; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: auf .5s cubic-bezier(.2,1.6,.4,1) both; animation-delay: .9s; }
+  #kisteAuf .karte b { font-size: 1.4rem; -webkit-text-stroke: 1.5px #111; paint-order: stroke fill; }
+  #kisteAuf .karte img { width: 140px; height: 140px; } #kisteAuf .karte .e { font-size: 5rem; }
+  #kisteAuf .karte span:not(.e) { background: #fff; color: #111; border: 2px solid #111; border-radius: 8px; padding: 2px 8px; font-weight: 700; }
   a.zurueck { color: #111; font-weight: 800; text-decoration: none; background: #fff; border: 3px solid #111; border-radius: 8px; padding: 4px 10px; box-shadow: 3px 3px 0 #111; }
 </style>
 </head>
@@ -122,6 +148,14 @@
       <div><b id="rankName"></b> · <span id="rankBonus"></span> · 💰 <b id="coins">0</b></div>
       <div class="bar"><i id="rankBar"></i></div>
     </div>
+    <div class="tabs" role="tablist" id="tabs">
+      <button class="tab" role="tab" data-tab="einsatz">🕶️ Einsatz</button>
+      <button class="tab" role="tab" data-tab="pass">🎖️ Pass</button>
+      <button class="tab" role="tab" data-tab="auftraege">📋 Aufträge</button>
+      <button class="tab" role="tab" data-tab="garderobe">👔 Garderobe</button>
+      <button class="tab" role="tab" data-tab="laden">🛒 Ausrüstung</button>
+    </div>
+    <div class="seite" data-seite="einsatz">
     <h2>Wähle deinen Agenten</h2>
     <div class="agenten" id="agenten"></div>
     <div class="panel info" id="agentInfo"></div>
@@ -153,6 +187,27 @@
       </div>
       <p class="toast" id="koopFehler" style="color:#e02020;-webkit-text-stroke:0"></p>
     </div>
+    </div>
+    <div class="seite" data-seite="pass" hidden>
+      <h2 id="passTitel"></h2>
+      <div class="panel rang"><div id="passInfo"></div><div class="bar"><i id="passBar"></i></div></div>
+      <div class="stufen" id="stufen"></div>
+      <div class="row"><button class="btn" id="passAlle">Alle abholen</button></div>
+      <p class="panel" id="passBonus"></p>
+    </div>
+    <div class="seite" data-seite="auftraege" hidden>
+      <h2>📋 Aufträge</h2>
+      <div class="panel" id="auftraege"></div>
+      <p class="panel" id="auftragInfo"></p>
+    </div>
+    <div class="seite" data-seite="garderobe" hidden>
+      <h2>🎁 Geheimkisten</h2>
+      <div class="panel"><p>Jede Kiste enthält einen Skin oder Geld. Doppelte Skins werden zu Geld. Kisten gibt es im Pass, für Wochenaufträge und hier zu kaufen.</p>
+        <div class="row" style="margin-top:10px"><button class="btn" id="kisteAuf1">🎁 Kiste öffnen (<span id="kistenZahl">0</span>)</button><button class="btn alt" id="kisteKauf">Kiste kaufen – 200 💰</button></div></div>
+      <h2 id="garderobeTitel"></h2>
+      <div class="garderobe" id="garderobe"></div>
+    </div>
+    <div class="seite" data-seite="laden" hidden>
     <h2>Ausrüstung (dauerhaft)</h2>
     <div class="shop" id="shop"></div>
     <div class="row">
@@ -160,8 +215,15 @@
       <button class="btn ghost" data-sl-cloud>☁️ Spielstand sichern</button>
     </div>
     <p class="panel" id="bestInfo"></p>
+    </div>
   </div>
 </div>
+
+<div class="screen" id="kisteAuf" hidden><div class="inner">
+  <div class="chestBox" aria-hidden="true">🎁</div>
+  <div class="karte" id="kisteKarte"></div>
+  <div class="row"><button class="btn" id="kisteNochmal">Noch eine öffnen</button><button class="btn ghost" id="kisteZu">Fertig</button></div>
+</div></div>
 
 <div class="screen" id="lvl" hidden><div class="inner">
   <h2>LEVEL UP! Wähle ein Upgrade</h2>
@@ -255,6 +317,22 @@ const EVO = {
   taser: { need: 'kaffee', name: 'Gewitter-Solo', emo: '⚡', txt: 'Blitze springen über den halben Bildschirm.' },
   faeuste: { need: 'kevlar', name: 'Eisenfaust', emo: '🦾', txt: 'Rundumschlag mit doppelter Reichweite.' }
 };
+// Skins: Outfits, die über das Aussehen eines Agenten gelegt werden (Haut und Haare bleiben)
+const RARITAET = { g: { name: 'Gewöhnlich', col: '#7d8494', w: 50, dup: 50 }, s: { name: 'Selten', col: '#2f7bf6', w: 30, dup: 100 }, e: { name: 'Episch', col: '#a020c0', w: 15, dup: 200 }, l: { name: 'Legendär', col: '#e09a00', w: 5, dup: 400 } };
+const SKINS = {
+  grau: { name: 'Grauer Anzug', r: 'g', look: { suit: '#6b7080' } },
+  marine: { name: 'Marine', r: 'g', look: { suit: '#1f3a6b', tie: '#ffd23f' } },
+  tarn: { name: 'Tarnung', r: 'g', look: { suit: '#4a5a3a', shirt: '#2e3a24', tie: '#2e3a24' } },
+  weiss: { name: 'Weißer Smoking', r: 's', look: { suit: '#f2f2f2', shirt: '#fff', tie: '#111' } },
+  bordeaux: { name: 'Bordeaux', r: 's', look: { suit: '#6a1424', tie: '#ffd23f' } },
+  pink: { name: 'Pink Panther', r: 's', look: { suit: '#ff5fa2', tie: '#111', brille: 'sonne' } },
+  neon: { name: 'Neon-Nacht', r: 'e', look: { suit: '#111', shirt: '#111', tie: '#39ff14', brille: 'sonne' } },
+  ninja: { name: 'Schattenninja', r: 'e', look: { suit: '#151515', hut: 'ninja', tie: '#e02020' } },
+  pilot: { name: 'Kampfpilot', r: 'e', look: { suit: '#5a6a3a', shirt: '#3a4a2a', tie: '#c01818', hut: 'cap', hutCol: '#3a4a2a', brille: 'sonne' } },
+  gold: { name: 'Goldjunge', r: 'l', look: { suit: '#d4a017', shirt: '#111', tie: '#111', brille: 'sonne' } },
+  phantom: { name: 'Phantom', r: 'l', look: { suit: '#0a0a0a', shirt: '#2a0a3a', tie: '#8a2be2', brille: 'sonne', umhang: '#111' } },
+  diamant: { name: 'Diamant', r: 'l', look: { suit: '#8fe3ff', shirt: '#fff', tie: '#fff', brille: 'sonne' } }
+};
 const META = {
   hp: { name: 'Leben', emo: '❤️', txt: '+12 % Leben', max: 8 },
   dmg: { name: 'Schaden', emo: '💥', txt: '+8 % Schaden', max: 8 },
@@ -295,7 +373,7 @@ const DAILY_MISSION = 3;
 
 /* ---------- Spielstand ---------- */
 const SAVE_KEY = 'cl_save';
-const DEF = { coins: 0, agenten: ['matteo', 'timo'], agent: 'matteo', up: {}, best: 0, daily: { day: '', best: 0 }, muted: false, runs: 0, rank: 1, rxp: 0, maxMission: 1, mission: 1, fusionen: [] };
+const DEF = { skins: [], skin: {}, kisten: 1, pass: null, auftr: null, woche: null, coins: 0, agenten: ['matteo', 'timo'], agent: 'matteo', up: {}, best: 0, daily: { day: '', best: 0 }, muted: false, runs: 0, rank: 1, rxp: 0, maxMission: 1, mission: 1, fusionen: [] };
 for (const k in META) DEF.up[k] = 0;
 let save = (() => {
   const d = JSON.parse(JSON.stringify(DEF));
@@ -307,6 +385,8 @@ let save = (() => {
       for (const a of DEF.agenten) if (!d.agenten.includes(a)) d.agenten.push(a);
       if (!AGENTEN[d.agent]) d.agent = 'matteo';
       d.fusionen = Array.isArray(s.fusionen) ? s.fusionen : [];
+      d.skins = Array.isArray(s.skins) ? s.skins.filter(k => typeof k === 'string') : [];
+      d.skin = s.skin && typeof s.skin === 'object' ? s.skin : {};
     }
   } catch (e) {}
   return d;
@@ -432,14 +512,19 @@ function figurBilder(key, look, opt) {
   if (FIG[key]) return FIG[key];
   return FIG[key] = [0, 1, 2, 3].map(f => vorrender(opt.scale || 1, x => opt.hund ? hundZeichnen(x, f) : figurZeichnen(x, look, opt, f)));
 }
-for (const id in AGENTEN) { const a = AGENTEN[id]; figurBilder('a_' + id, a.look, { scale: a.scale, bauch: a.bauch }); }
+const agentLook = (id, skin) => SKINS[skin] ? Object.assign({}, AGENTEN[id].look, SKINS[skin].look) : AGENTEN[id].look;
+const agentBilder = (id, skin) => { const a = AGENTEN[id] || AGENTEN.matteo; return figurBilder('a_' + id + '_' + (SKINS[skin] ? skin : ''), agentLook(id, skin), { scale: a.scale, bauch: a.bauch }); };
+for (const id in AGENTEN) agentBilder(id, '');
 for (const t in TYPES) { const T = TYPES[t]; figurBilder('e_' + t, T.look, { scale: T.scale, bauch: T.bauch, waffe: T.waffe, gross: T.gross, hund: T.hund }); }
-const PORTRAIT = {};
-for (const id in AGENTEN) {
+const PORTRAITS = {};
+function portrait(id, skin) {
+  if (!AGENTEN[id]) id = 'matteo'; if (!SKINS[skin]) skin = '';
+  const k = id + '_' + skin; if (PORTRAITS[k]) return PORTRAITS[k];
   const a = AGENTEN[id], c = document.createElement('canvas'); c.width = c.height = 160; const x = c.getContext('2d');
-  x.translate(80, 150); x.scale(1.75, 1.75); figurZeichnen(x, a.look, { bauch: a.bauch, grinsen: true }, 0);
-  PORTRAIT[id] = c.toDataURL();
+  x.translate(80, 150); x.scale(1.75, 1.75); figurZeichnen(x, agentLook(id, skin), { bauch: a.bauch, grinsen: true }, 0);
+  return PORTRAITS[k] = c.toDataURL();
 }
+const meinSkin = id => (save.skin && SKINS[save.skin[id]] && save.skins.includes(id + ':' + save.skin[id])) ? save.skin[id] : '';
 function figurMalen(bilder, px, py, frame, flip, weiss, skal) {
   const b = bilder[frame & 3], s = skal || 1, img = weiss ? b.wc : b.c;
   ctx.save(); ctx.translate(px, py); if (flip) ctx.scale(-1, 1);
@@ -498,7 +583,7 @@ const PF = ['id', 'name', 'agent', 'px', 'py', 'vx', 'vy', 'ang', 'face', 'walk'
 function spielerNeu(s, i, n) {
   const A = AGENTEN[s.agent] || AGENTEN.matteo, up = Object.assign({}, DEF.up, s.up || {}), rankB = (Math.max(1, s.rank || 1) - 1) * 0.02;
   const maxhp = Math.round(100 * (s.agent === 'timo' ? 1.2 : 1) * (A.bauch ? 1.25 : 1) * (1 + 0.12 * up.hp + rankB));
-  return { id: s.id, name: s.name || A.name, agent: AGENTEN[s.agent] ? s.agent : 'matteo', px: (i - (n - 1) / 2) * 70, py: 0, vx: 0, vy: 0, ang: 0, face: 1, walk: 0, moving: false,
+  return { skin: SKINS[s.skin] ? s.skin : '', id: s.id, name: s.name || A.name, agent: AGENTEN[s.agent] ? s.agent : 'matteo', px: (i - (n - 1) / 2) * 70, py: 0, vx: 0, vy: 0, ang: 0, face: 1, walk: 0, moving: false,
     inv: 0, hp: maxhp, maxhp, w: { [A.w]: 1 }, ev: {}, p: { sneaker: 0, kevlar: 0, funk: 0, munition: 0, kaffee: 0, kaliber: 0 }, cd: {}, orbA: 0, muzzle: 0,
     ulti: 0, ultMode: null, ultT: 0, ultTick: 0, revives: up.revive || 0, rerolls: up.reroll || 0, trailT: 0, down: false, ko: 0, up, rankB, droneDraw: null };
 }
@@ -517,7 +602,7 @@ function startRun(daily, koop) {
     xp: 0, lvl: 1, need: needXp(1), kills: 0, bosses: 0, E: [], S: [], EB: [], GM: [], FX: [], TX: [], RG: [], POOL: [], GR: [], STR: [],
     spawnAcc: 0, nextBoss: 120, finaleDa: false, bannerT: 0, flash: 0, wflash: 0, shake: 0, freeze: 0, won: false, neueFusion: [], wortT: 0,
     FXneu: [], TXneu: [], snapT: 0, eid: 1 };
-  const liste = koop ? koop.spieler : [{ id: 0, name: spielerName(), agent: save.agent, up: save.up, rank: save.rank }];
+  const liste = koop ? koop.spieler : [{ id: 0, name: spielerName(), agent: save.agent, skin: meinSkin(save.agent), up: save.up, rank: save.rank }];
   G.P = liste.map((sp, i) => spielerNeu(sp, i, liste.length));
   G.meId = koop ? Netz.ich : 0;
   G.me = G.P.find(q => q.id === G.meId) || G.P[0]; laden(G.me);
@@ -711,9 +796,9 @@ function objekteTick(dt) {
 }
 
 /* Ulti */
-function zeigeCutin(agent, name) {
+function zeigeCutin(agent, name, skin) {
   const A = AGENTEN[agent];
-  $('ciImg').src = PORTRAIT[agent]; $('ciName').textContent = (name || A.name).toUpperCase(); $('ciUlt').textContent = A.ultName + '!';
+  $('ciImg').src = portrait(agent, skin); $('ciName').textContent = (name || A.name).toUpperCase(); $('ciUlt').textContent = A.ultName + '!';
   $('ciBand').style.setProperty('--c1', A.col); $('ciBand').style.setProperty('--c2', shade(A.col, .45));
   const ci = $('cutin'); ci.hidden = false; ci.querySelectorAll('*').forEach(n => { n.style.animation = 'none'; void n.offsetWidth; n.style.animation = ''; });
   knall('cut', .5, .3, 2500); sfx('cutin', 220, .6, 'sawtooth', .06, 700);
@@ -728,8 +813,9 @@ function ultiAusloesen(pl) {
   if (!G || state !== 'play' || !G.P.includes(pl)) return;
   const ok = alsSpieler(pl, () => { if (G.ulti < 100 || G.ultMode || G.down) return false; G.ulti = 0; return true; });
   if (!ok) return;
-  zeigeCutin(pl.agent, G.coop ? pl.name : null);
-  if (G.coop) sendeAlle({ k: 'cut', a: pl.agent, n: pl.name });
+  zeigeCutin(pl.agent, G.coop ? pl.name : null, pl.skin);
+  if (pl === G.me) G.stUlti = (G.stUlti || 0) + 1;
+  if (G.coop) sendeAlle({ k: 'cut', a: pl.agent, n: pl.name, s: pl.skin, id: pl.id });
   state = 'cutin'; if (pl === G.me) stopInput();
   setTimeout(() => { $('cutin').hidden = true; if (G && state === 'cutin') { state = 'play'; last = performance.now(); if (G.P.includes(pl)) alsSpieler(pl, () => ultiAus(AGENTEN[pl.agent].ult)); } }, 950);
 }
@@ -954,6 +1040,7 @@ function lvlRundeFertig() {
   if (pending > 0) openLevelCoop(); else { $('lvl').hidden = true; sendeAlle({ k: 'lvlzu' }); resume(); }
 }
 function kofferToast(k) {
+  G.stKoffer = (G.stKoffer || 0) + 1;
   const el = $('kofferToast');
   el.innerHTML = '<div class="panel"><b>💼 ' + k.titel + '</b><br>' + k.out.map(o => o.emo + ' ' + o.name).join(' · ') + '</div>';
   el.hidden = false; el.style.animation = 'none'; void el.offsetWidth; el.style.animation = '';
@@ -976,6 +1063,7 @@ function kofferRollen() {
 }
 function fusionGefunden(evo) { if (!save.fusionen.includes(evo)) { save.fusionen.push(evo); G.neueFusion.push(evo); persist(); } }
 function openChest() {
+  G.stKoffer = (G.stKoffer || 0) + 1;
   const k = kofferRollen(), out = k.out;
   if (!k.evo) sfx('chest', 400, .4, 'square', .05, 400);
   $('chestTitle').textContent = k.titel;
@@ -1001,6 +1089,7 @@ function finish(win) {
   const rx = Math.max(10, Math.round(score / 20)); let rangUp = 0; save.rxp += rx;
   while (save.rxp >= rankNeed(save.rank)) { save.rxp -= rankNeed(save.rank); save.rank++; rangUp++; }
   save.coins += coins; save.runs++; persist();
+  const fort = fortschrittNachEinsatz({ kills: g.kills, bosse: g.bosses, zeit: g.t, win, agent: g.me.agent, koop: g.coop, bike: g.bike, ultis: g.stUlti || 0, koffer: g.stKoffer || 0 });
   $('endTitle').textContent = win ? (g.daily ? 'TAGESMISSION ERFÜLLT!' : (g.coop ? 'TEAM-' : '') + 'MISSION ' + g.mis + ' ERFÜLLT!') : g.coop ? 'TEAM AUSGESCHALTET!' : 'AGENT AUSGESCHALTET!';
   let h = '<b style="font-size:2rem">' + fmt(score) + ' Punkte</b><br>';
   h += newBest ? '<span class="neu">Neuer Rekord!</span><br>' : dBest ? '<span class="neu">Neuer Tages-Bestwert!</span><br>' : 'Rekord: ' + fmt(save.best) + '<br>';
@@ -1010,6 +1099,8 @@ function finish(win) {
   if (neu) { const mi = missionInfo(save.maxMission); h += '<span class="neu">🔓 Mission ' + save.maxMission + ' freigeschaltet: ' + mi.ort.name + (mi.bike ? ' (Verfolgungsjagd!)' : '') + '</span><br>'; }
   if (g.neueFusion.length) h += '<span class="fusion">📖 Neue Fusion: ' + g.neueFusion.map(id => EVO[id].name).join(', ') + '</span><br>';
   if (!win && g.t < RUN_END) h += '<small>Noch ' + zeit(RUN_END - g.t) + ' bis zum Oberschurken. Hol dir neue Ausrüstung!</small>';
+  h += '🎖️ +' + fort.xp + ' Pass-XP' + (fort.stufen ? ' – <span class="neu">' + fort.stufen + ' neue Pass-Stufe' + (fort.stufen > 1 ? 'n' : '') + ' zum Abholen!</span>' : '') + '<br>';
+  if (fort.fertig.length) h += '<span class="neu">📋 Auftrag erfüllt: ' + fort.fertig.join(' · ') + ' – im Menü abholen!</span><br>';
   if (g.coop) h += '<br><small>' + (g.gast ? 'Der Host kann sofort den nächsten Einsatz starten.' : 'Mit „Nochmal“ startet dein Team direkt den nächsten Einsatz.') + '</small>';
   $('endStats').innerHTML = h; $('end').hidden = false;
   $('again').hidden = !!g.gast;
@@ -1113,7 +1204,7 @@ function gegnerMalen(e) {
   }
 }
 function spielerMalen(pl) {
-  const g = G, A = AGENTEN[pl.agent], bilder = FIG['a_' + pl.agent];
+  const g = G, A = AGENTEN[pl.agent], bilder = agentBilder(pl.agent, pl.skin);
   if (pl.down) return koMalen(pl, bilder);
   let sc = pl.ultMode === 'bulldozer' ? 1.6 : 1;
   schatten(pl.px, pl.py, 18 * sc * (g.bike ? 1.6 : 1));
@@ -1238,7 +1329,207 @@ $('mute').onclick = () => { save.muted = !save.muted; persist(); renderMenu(); }
 let toastT = 0;
 function toast(t) { $('toast').textContent = t; clearTimeout(toastT); toastT = setTimeout(() => $('toast').textContent = '', 2600); }
 
+/* =========================================================
+   AGENTEN-PASS, AUFTRÄGE, KISTEN, GARDEROBE
+   Alles nur mit Spielgeld. Saisons und Aufträge entstehen automatisch aus dem Datum,
+   deshalb geht der Nachschub nie aus.
+   ========================================================= */
+const START_TAG = Date.UTC(2026, 10, 2) / 864e5;   // Montag, 2. November 2026
+const tagNr = () => { const d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) - START_TAG; };
+const SAISON_TAGE = 14, PASS_STUFEN = 30, STUFE_XP = 500, BONUS_XP = 1000, KISTE_PREIS = 200;
+const SAISON_NAMEN = ['Operation Nachtfalke', 'Operation Goldfinger', 'Operation Eisberg', 'Operation Wüstensturm', 'Operation Neonstadt', 'Operation Tiefsee', 'Operation Donnerkeil', 'Operation Schattenhand'];
+const saisonNr = () => Math.floor(Math.max(0, tagNr()) / SAISON_TAGE) + 1;
+const zufallSkin = (r, rar) => { const ids = Object.keys(AGENTEN), th = Object.keys(SKINS).filter(k => SKINS[k].r === rar); return ids[Math.floor(r() * ids.length)] + ':' + th[Math.floor(r() * th.length)]; };
+function saisonBelohnungen(nr) {
+  const r = rng(nr * 7919 + 13), liste = [];
+  for (let st = 1; st <= PASS_STUFEN; st++) {
+    if (st === PASS_STUFEN) liste.push({ art: 'skin', id: zufallSkin(r, 'l') });
+    else if (st % 10 === 0) liste.push({ art: 'skin', id: zufallSkin(r, 'e') });
+    else if (st % 5 === 0) liste.push({ art: 'skin', id: zufallSkin(r, 's') });
+    else if (st % 3 === 0) liste.push({ art: 'kiste', n: 1 });
+    else liste.push({ art: 'geld', n: 80 + st * 10 });
+  }
+  return liste;
+}
+let BELOHNUNG_CACHE = { nr: 0, liste: [] };
+function belohnungen() { const nr = saisonNr(); if (BELOHNUNG_CACHE.nr !== nr) BELOHNUNG_CACHE = { nr, liste: saisonBelohnungen(nr) }; return BELOHNUNG_CACHE.liste; }
+function passStand() {
+  const nr = saisonNr();
+  if (!save.pass || save.pass.s !== nr) save.pass = { s: nr, xp: 0, geholt: [], bonus: 0 };
+  return save.pass;
+}
+const passStufe = p => Math.min(PASS_STUFEN, Math.floor(p.xp / STUFE_XP));
+const bonusOffen = p => Math.max(0, Math.floor(Math.max(0, p.xp - PASS_STUFEN * STUFE_XP) / BONUS_XP) - p.bonus);
+const passOffen = p => { let n = 0; for (let st = 1; st <= passStufe(p); st++) if (!p.geholt.includes(st)) n++; return n + bonusOffen(p); };
+
+// Eine Belohnung gutschreiben; gibt eine Karte zum Anzeigen zurück
+function skinGeben(id) {
+  const [ag, th] = id.split(':'), S = SKINS[th], A = AGENTEN[ag];
+  if (!S || !A) return { emo: '💰', name: '100 Geld', txt: '', rar: 'g' };
+  if (save.skins.includes(id)) { const n = RARITAET[S.r].dup; save.coins += n; return { bild: portrait(ag, th), name: S.name + ' · ' + A.name, txt: 'Hattest du schon – dafür ' + n + ' 💰', rar: S.r }; }
+  save.skins.push(id); return { bild: portrait(ag, th), name: S.name + ' · ' + A.name, txt: 'Neuer Skin! In der Garderobe anlegen.', rar: S.r, neu: true };
+}
+function belohnen(b) {
+  if (b.art === 'geld') { save.coins += b.n; return { emo: '💰', name: b.n + ' Geld', txt: '', rar: 'g' }; }
+  if (b.art === 'kiste') { save.kisten += b.n; return { emo: '🎁', name: b.n + ' Geheimkiste', txt: '', rar: 's' }; }
+  return skinGeben(b.id);
+}
+function belohnungBild(b) {
+  if (b.art === 'geld') return '<span class="e">💰</span><small>' + b.n + '</small>';
+  if (b.art === 'kiste') return '<span class="e">🎁</span><small>Kiste</small>';
+  const [ag, th] = b.id.split(':'); return '<img src="' + portrait(ag, th) + '" alt=""><small style="color:' + RARITAET[SKINS[th].r].col + '">' + SKINS[th].name + '</small>';
+}
+function stufeAbholen(st) {
+  const p = passStand(); if (st > passStufe(p) || p.geholt.includes(st)) return null;
+  p.geholt.push(st); const k = belohnen(belohnungen()[st - 1]); persist(); return k;
+}
+
+// Aufträge: 3 neue pro Tag, 1 großer pro Woche
+const AUFTRAG_TYPEN = {
+  kills: { txt: n => 'Schalte ' + n + ' Gegner aus', z: [150, 250, 400], w: 1500 },
+  einsatz: { txt: n => 'Spiele ' + n + ' Einsätze', z: [2, 3, 4], w: 12 },
+  bosse: { txt: n => 'Besiege ' + n + (n === 1 ? ' Boss' : ' Bosse'), z: [1, 2, 3], w: 10 },
+  zeit: { txt: n => 'Überlebe ' + n + ' Minuten in einem Einsatz', z: [3, 4, 5], max: true },
+  ulti: { txt: n => 'Löse ' + n + ' Ultis aus', z: [2, 3, 5], w: 20 },
+  koffer: { txt: n => 'Sammle ' + n + (n === 1 ? ' Geheimkoffer' : ' Geheimkoffer'), z: [1, 2], w: 6 },
+  sieg: { txt: n => n === 1 ? 'Erfülle eine Mission' : 'Erfülle ' + n + ' Missionen', z: [1], w: 3 },
+  koop: { txt: () => 'Spiele einen Koop-Einsatz', z: [1] },
+  bike: { txt: () => 'Spiele eine Verfolgungsjagd', z: [1] },
+  agent: { txt: (n, a) => 'Spiele einen Einsatz mit ' + (AGENTEN[a] ? AGENTEN[a].name : 'Matteo'), z: [1] }
+};
+function auftraegeStand() {
+  const tag = tagNr(), woche = Math.floor(tag / 7);
+  if (!save.auftr || save.auftr.tag !== tag) {
+    const r = rng(tag * 104729 + 7), typen = shuffle(Object.keys(AUFTRAG_TYPEN), r).slice(0, 3);
+    save.auftr = { tag, liste: typen.map(id => { const T = AUFTRAG_TYPEN[id]; return { id, ziel: T.z[Math.floor(r() * T.z.length)], a: id === 'agent' ? save.agenten[Math.floor(r() * save.agenten.length)] : null, stand: 0, geholt: false }; }) };
+  }
+  if (!save.woche || save.woche.w !== woche) {
+    const r = rng(woche * 7907 + 3), typen = Object.keys(AUFTRAG_TYPEN).filter(k => AUFTRAG_TYPEN[k].w), id = typen[Math.floor(r() * typen.length)];
+    save.woche = { w: woche, a: { id, ziel: AUFTRAG_TYPEN[id].w, stand: 0, geholt: false, woche: true } };
+  }
+  return save.auftr.liste.concat([save.woche.a]);
+}
+const auftragTxt = a => AUFTRAG_TYPEN[a.id].txt(a.ziel, a.a);
+const auftragLohn = a => a.woche ? { xp: 1000, geld: 150, kiste: 1 } : { xp: 250, geld: 60, kiste: 0 };
+const auftraegeOffen = () => auftraegeStand().filter(a => a.stand >= a.ziel && !a.geholt).length;
+function fortschrittNachEinsatz(st) {
+  const p = passStand(), vorher = passStufe(p), fertig = [];
+  const xp = Math.round(50 + st.kills / 2 + st.bosse * 40 + (st.win ? 150 : 0) + st.zeit / 3);
+  p.xp += xp;
+  const plus = { kills: st.kills, einsatz: 1, bosse: st.bosse, zeit: Math.floor(st.zeit / 60), ulti: st.ultis, koffer: st.koffer, sieg: st.win ? 1 : 0, koop: st.koop ? 1 : 0, bike: st.bike ? 1 : 0 };
+  for (const a of auftraegeStand()) {
+    if (a.geholt || a.stand >= a.ziel) continue;
+    const z = a.id === 'agent' ? (st.agent === a.a ? 1 : 0) : (plus[a.id] || 0);
+    a.stand = AUFTRAG_TYPEN[a.id].max ? Math.max(a.stand, z) : a.stand + z;
+    if (a.stand >= a.ziel) { a.stand = a.ziel; fertig.push(auftragTxt(a)); }
+  }
+  persist(); return { xp, fertig, stufen: passStufe(p) - vorher };
+}
+function auftragAbholen(a) {
+  if (a.geholt || a.stand < a.ziel) return;
+  const l = auftragLohn(a); a.geholt = true; save.coins += l.geld; save.kisten += l.kiste;
+  const p = passStand(); p.xp += l.xp; persist();
+  toast('+' + l.xp + ' Pass-XP · +' + l.geld + ' 💰' + (l.kiste ? ' · +1 🎁' : ''));
+  sfx('buy', 600, .2, 'square', .05, 500); renderMenu();
+}
+
+// Geheimkisten
+function kisteOeffnen() {
+  if (save.kisten <= 0) return;
+  save.kisten--;
+  let k;
+  if (Math.random() < .3) { const n = 60 + Math.floor(Math.random() * 6) * 30; save.coins += n; k = { emo: '💰', name: n + ' Geld', txt: 'Bar auf die Hand.', rar: 'g' }; }
+  else {
+    let w = Math.random() * 100, rar = 'g'; for (const r of ['l', 'e', 's', 'g']) { if (w < RARITAET[r].w) { rar = r; break; } w -= RARITAET[r].w; }
+    k = skinGeben(zufallSkin(Math.random, rar));
+  }
+  persist(); zeigeBelohnung(k, true);
+}
+function zeigeBelohnung(k, kiste) {
+  const R = RARITAET[k.rar] || RARITAET.g, el = $('kisteKarte');
+  el.style.setProperty('--r', R.col);
+  el.innerHTML = (k.bild ? '<img src="' + k.bild + '" alt="">' : '<span class="e">' + k.emo + '</span>') + '<b>' + escH(k.name) + '</b><span>' + R.name + '</span>' + (k.txt ? '<small style="font-weight:700">' + escH(k.txt) + '</small>' : '');
+  const scr = $('kisteAuf'); scr.querySelector('.chestBox').hidden = !kiste;
+  el.style.animationDelay = kiste ? '.9s' : '0s';
+  scr.querySelectorAll('.chestBox, .karte').forEach(n => { n.style.animation = 'none'; void n.offsetWidth; n.style.animation = ''; });
+  $('kisteNochmal').hidden = !kiste || save.kisten <= 0; $('kisteNochmal').textContent = 'Noch eine öffnen (' + save.kisten + ')';
+  scr.hidden = false;
+  if (kiste) { sfx('kiste', 300, .5, 'square', .05, 300); setTimeout(() => sfx('auf', k.rar === 'l' ? 900 : 600, .5, 'triangle', .07, 600), 900); }
+}
+$('kisteAuf1').onclick = () => { if (save.kisten > 0) kisteOeffnen(); else toast('Keine Kiste da – kauf eine oder hol dir eine im Pass.'); };
+$('kisteKauf').onclick = () => { if (save.coins < KISTE_PREIS) return toast('Noch ' + (KISTE_PREIS - save.coins) + ' 💰 für eine Kiste.'); save.coins -= KISTE_PREIS; save.kisten++; persist(); kisteOeffnen(); };
+$('kisteNochmal').onclick = () => kisteOeffnen();
+$('kisteZu').onclick = () => { $('kisteAuf').hidden = true; renderMenu(); };
+
+// Reiter im Menü
+let menuTab = 'einsatz';
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => { menuTab = b.dataset.tab; renderMenu(); });
+function renderExtras() {
+  const p = passStand(), auftr = auftraegeStand();
+  document.querySelectorAll('.tab').forEach(b => {
+    b.setAttribute('aria-selected', b.dataset.tab === menuTab);
+    const n = b.dataset.tab === 'pass' ? passOffen(p) : b.dataset.tab === 'auftraege' ? auftraegeOffen() : b.dataset.tab === 'garderobe' ? save.kisten : 0;
+    let pk = b.querySelector('.punkt'); if (n && !pk) { pk = document.createElement('span'); pk.className = 'punkt'; b.appendChild(pk); }
+    if (pk) { pk.textContent = n; pk.hidden = !n; }
+  });
+  document.querySelectorAll('.seite').forEach(el => el.hidden = el.dataset.seite !== menuTab);
+
+  // Pass
+  const nr = saisonNr(), rest = SAISON_TAGE - (Math.max(0, tagNr()) % SAISON_TAGE), stufe = passStufe(p);
+  $('passTitel').textContent = '🎖️ Saison ' + nr + ': ' + SAISON_NAMEN[(nr - 1) % SAISON_NAMEN.length];
+  $('passInfo').innerHTML = '<b>Stufe ' + stufe + ' / ' + PASS_STUFEN + '</b> · ' + p.xp + ' Pass-XP · noch ' + rest + (rest === 1 ? ' Tag' : ' Tage') + ' in dieser Saison';
+  $('passBar').style.width = (stufe >= PASS_STUFEN ? ((p.xp - PASS_STUFEN * STUFE_XP) % BONUS_XP) / BONUS_XP * 100 : (p.xp % STUFE_XP) / STUFE_XP * 100) + '%';
+  const bel = belohnungen(), box = $('stufen'); box.innerHTML = '';
+  bel.forEach((b, i) => {
+    const st = i + 1, weg = p.geholt.includes(st), frei = st <= stufe && !weg, d = document.createElement('button');
+    d.className = 'stufe' + (weg ? ' weg' : frei ? ' frei' : ' zu');
+    d.innerHTML = '<b>' + (weg ? '✔ ' : '') + st + '</b>' + belohnungBild(b);
+    d.setAttribute('aria-label', 'Stufe ' + st + (weg ? ', abgeholt' : frei ? ', abholen' : ', gesperrt'));
+    d.onclick = () => { if (!frei) return toast(weg ? 'Schon abgeholt.' : 'Noch ' + (st * STUFE_XP - p.xp) + ' Pass-XP bis Stufe ' + st + '.'); const k = stufeAbholen(st); if (k) zeigeBelohnung(k, false); renderMenu(); };
+    box.appendChild(d);
+  });
+  const offen = passOffen(p);
+  $('passAlle').hidden = !offen; $('passAlle').textContent = 'Alle abholen (' + offen + ')';
+  const bo = bonusOffen(p);
+  $('passBonus').innerHTML = stufe >= PASS_STUFEN ? '⭐ Pass voll! Alle ' + BONUS_XP + ' Pass-XP gibt es jetzt eine Bonus-Kiste.' + (bo ? ' <b>' + bo + ' bereit!</b>' : '') : 'Pass-XP gibt es für jeden Einsatz und für Aufträge. Alle ' + STUFE_XP + ' XP steigst du eine Stufe auf.';
+  // Aufträge
+  const ab = $('auftraege'); ab.innerHTML = '';
+  auftr.forEach(a => {
+    const l = auftragLohn(a), fertig = a.stand >= a.ziel, d = document.createElement('div'); d.className = 'auftrag';
+    d.innerHTML = '<div><b>' + (a.woche ? '📅 Woche: ' : '') + escH(auftragTxt(a)) + '</b><br><small>+' + l.xp + ' Pass-XP · +' + l.geld + ' 💰' + (l.kiste ? ' · +1 🎁' : '') + '</small></div>';
+    const b = document.createElement('button'); b.className = 'btn' + (fertig && !a.geholt ? '' : ' ghost'); b.style.minHeight = '44px'; b.style.fontSize = '1rem';
+    b.textContent = a.geholt ? '✔ Erledigt' : fertig ? 'Abholen' : a.stand + ' / ' + a.ziel; b.disabled = a.geholt || !fertig; b.onclick = () => auftragAbholen(a);
+    d.appendChild(b);
+    const bar = document.createElement('div'); bar.className = 'bar'; bar.innerHTML = '<i style="width:' + Math.min(100, a.stand / a.ziel * 100) + '%"></i>'; d.appendChild(bar);
+    ab.appendChild(d);
+  });
+  const jetzt = new Date(), std = 23 - jetzt.getHours();
+  $('auftragInfo').textContent = 'Neue Tagesaufträge in ' + (std > 0 ? std + ' Std.' : (60 - jetzt.getMinutes()) + ' Min.') + ' · der Wochenauftrag wechselt jeden Montag.';
+  // Garderobe
+  $('kistenZahl').textContent = save.kisten;
+  const ag = save.agent, A = AGENTEN[ag], gb = $('garderobe'); gb.innerHTML = '';
+  $('garderobeTitel').textContent = '👔 Garderobe: ' + A.name + ' (' + (Object.keys(SKINS).filter(t => save.skins.includes(ag + ':' + t)).length) + ' / ' + Object.keys(SKINS).length + ')';
+  [''].concat(Object.keys(SKINS)).forEach(th => {
+    const hat = !th || save.skins.includes(ag + ':' + th), an = meinSkin(ag) === th, S = SKINS[th], R = S ? RARITAET[S.r] : RARITAET.g, b = document.createElement('button');
+    b.className = 'skin' + (hat ? '' : ' zu') + (an ? ' an' : ''); b.style.setProperty('--r', R.col);
+    b.innerHTML = '<img src="' + portrait(ag, th) + '" alt="">' + (S ? S.name : 'Standard') + '<small>' + (S ? R.name : 'Basis') + '</small>' + (an ? '✔ An' : hat ? 'Anziehen' : '🔒 Kiste/Pass');
+    b.onclick = () => { if (!hat) return toast(S.name + ' gibt es in Geheimkisten und im Pass.'); save.skin[ag] = th; persist(); sfx('buy', 500, .15, 'square', .04, 300); renderMenu(); koopProfil(); };
+    gb.appendChild(b);
+  });
+}
+$('passAlle').onclick = () => {
+  const p = passStand(), karten = [];
+  for (let st = 1; st <= passStufe(p); st++) { const k = stufeAbholen(st); if (k) karten.push(k); }
+  for (let i = bonusOffen(p); i > 0; i--) { p.bonus++; save.kisten++; karten.push({ emo: '🎁', name: 'Bonus-Kiste', txt: '', rar: 's' }); }
+  persist();
+  if (karten.length === 1) zeigeBelohnung(karten[0], false);
+  else if (karten.length) { const skins = karten.filter(k => k.bild); zeigeBelohnung({ emo: '🎉', bild: skins.length ? skins[skins.length - 1].bild : null, name: karten.length + ' Belohnungen', txt: karten.map(k => k.name).join(' · '), rar: skins.length ? skins[skins.length - 1].rar : 's' }, false); }
+  renderMenu();
+};
+function escH(t) { return String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
 function renderMenu() {
+  renderExtras();
   $('coins').textContent = fmt(save.coins);
   $('rankName').textContent = '⭐ Agenten-Rang ' + save.rank;
   $('rankBonus').textContent = save.rank > 1 ? '+' + Math.round(rankBonus() * 100) + ' % Schaden & Leben für immer' : 'jeder Einsatz bringt Rang-XP';
@@ -1247,7 +1538,7 @@ function renderMenu() {
   for (const id in AGENTEN) {
     const a = AGENTEN[id], own = save.agenten.includes(id), b = document.createElement('button');
     b.className = 'agent' + (save.agent === id ? ' sel' : '') + (own ? '' : ' lock'); b.style.setProperty('--c', a.col);
-    b.innerHTML = '<img src="' + PORTRAIT[id] + '" alt="">' + a.name + '<small>' + (own ? a.code : '🔒 ' + a.cost + ' 💰') + '</small>';
+    b.innerHTML = '<img src="' + portrait(id, meinSkin(id)) + '" alt="">' + a.name + '<small>' + (own ? a.code : '🔒 ' + a.cost + ' 💰') + '</small>';
     b.setAttribute('aria-label', a.name + (own ? '' : ', gesperrt, kostet ' + a.cost));
     b.onclick = () => {
       if (own) save.agent = id;
@@ -1321,7 +1612,7 @@ let koopRaum = null;
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 function slName() { try { return localStorage.getItem('sl_name') || ''; } catch (e) { return ''; } }
 function spielerName() { return (save.name || slName() || AGENTEN[save.agent].name).slice(0, 16); }
-function koopProfilDaten() { return { name: spielerName(), agent: save.agent, up: save.up, rank: save.rank }; }
+function koopProfilDaten() { return { name: spielerName(), agent: save.agent, skin: meinSkin(save.agent), up: save.up, rank: save.rank }; }
 function koopProfil() { if (koopRaum) Netz.senden(Object.assign({ t: 'wahl' }, koopProfilDaten())); }
 function koopFehler(t) { $('koopFehler').textContent = t || ''; }
 async function koopVerbinden() {
@@ -1347,7 +1638,7 @@ $('koopTeilen').onclick = async () => {
 function koopZeigen() {
   const r = koopRaum; $('koopAus').hidden = !!r; $('koopIn').hidden = !r; if (!r) return;
   $('koopRaum').textContent = r.code;
-  $('koopListe').innerHTML = r.spieler.map(sp => { const A = AGENTEN[sp.agent] || AGENTEN.matteo; return '<div style="--c:' + A.col + '"><img src="' + PORTRAIT[AGENTEN[sp.agent] ? sp.agent : 'matteo'] + '" alt="">' + esc(sp.name) + '<small>' + (sp.id === r.host ? '👑 Host' : A.name) + '</small></div>'; }).join('');
+  $('koopListe').innerHTML = r.spieler.map(sp => { const A = AGENTEN[sp.agent] || AGENTEN.matteo; return '<div style="--c:' + A.col + '"><img src="' + portrait(sp.agent, sp.skin) + '" alt="">' + esc(sp.name) + '<small>' + (sp.id === r.host ? '👑 Host' : A.name) + '</small></div>'; }).join('');
   const host = r.host === Netz.ich, mi = missionInfo(save.mission);
   $('koopStart').hidden = !host;
   $('koopHinweis').textContent = r.laeuft ? 'Der Einsatz läuft gerade.' : host ? (r.spieler.length < 2 ? 'Schick den Code an deine Freunde – sobald jemand drin ist, kannst du starten.' : 'Ihr spielt Mission ' + save.mission + ' (' + mi.ort.name + (mi.bike ? ', Verfolgungsjagd' : '') + '). Die Mission wählst du oben aus.') : 'Warte auf den Host … Deinen Agenten kannst du oben noch wechseln.';
@@ -1443,7 +1734,7 @@ function vomHost(d) {
     if (d.ban && d.ban !== g.letzterBanner) banner(d.ban);
     g.letzterBanner = d.ban;
   } else if (d.k === 'cut') {
-    zeigeCutin(d.a, d.n);
+    zeigeCutin(d.a, d.n, d.s); if (d.id === g.meId) g.stUlti = (g.stUlti || 0) + 1;
     if (state === 'play') { state = 'cutin'; stopInput(); }
     setTimeout(() => { $('cutin').hidden = true; if (G === g && state === 'cutin') { state = 'play'; last = performance.now(); } }, 950);
   } else if (d.k === 'lvl') {
