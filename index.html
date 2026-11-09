@@ -124,6 +124,42 @@
   #kisteAuf .karte b { font-size: 1.4rem; -webkit-text-stroke: 1.5px #111; paint-order: stroke fill; }
   #kisteAuf .karte img { width: 140px; height: 140px; } #kisteAuf .karte .e { font-size: 5rem; }
   #kisteAuf .karte span:not(.e) { background: #fff; color: #111; border: 2px solid #111; border-radius: 8px; padding: 2px 8px; font-weight: 700; }
+  /* Comic-Kino */
+  #kino { position: fixed; inset: 0; background: #000; overflow: hidden; cursor: pointer; z-index: 50; }
+  .kbild { position: absolute; inset: 0; transition: transform .6s ease; }
+  .kbild::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle, rgba(0,0,0,.22) 2px, transparent 2.6px) 0 0/14px 14px; }
+  .kbild.akt::before { content: ""; position: absolute; inset: -20%; pointer-events: none; z-index: 1; background: repeating-conic-gradient(from 0deg at 50% 55%, rgba(255,255,255,.22) 0 2deg, transparent 2deg 9deg); animation: dreh 6s linear infinite; }
+  @keyframes dreh { to { transform: rotate(360deg); } }
+  .kbild.zoom { transform: scale(1.08); }
+  .kbild.shake { animation: kshake .45s ease; }
+  @keyframes kshake { 20% { transform: translate(-14px, 6px) rotate(-1deg); } 40% { transform: translate(12px, -8px) rotate(1deg); } 60% { transform: translate(-8px, 4px); } 80% { transform: translate(6px, -2px); } }
+  .kfig { position: absolute; bottom: 9vh; height: min(66vh, 92vw); z-index: 2; filter: drop-shadow(8px 8px 0 #111); transition: filter .25s, transform .25s; }
+  .kfig.l { left: 1vw; } .kfig.r { right: 1vw; transform: scaleX(-1); }
+  .kfig.stumm { filter: drop-shadow(8px 8px 0 #111) brightness(.45) saturate(.6); }
+  .kfig.l.rein { animation: reinL .45s cubic-bezier(.2,1.4,.4,1); } .kfig.r.rein { animation: reinR .45s cubic-bezier(.2,1.4,.4,1); }
+  @keyframes reinL { from { transform: translateX(-60vw); } } @keyframes reinR { from { transform: translateX(60vw) scaleX(-1); } }
+  .kcap { position: absolute; top: 11vh; left: 3vw; max-width: 70vw; z-index: 3; background: #ffd23f; border: 4px solid #111; box-shadow: 5px 5px 0 #111; padding: 6px 14px; font-weight: 800; font-style: italic; font-size: clamp(.95rem, 2.6vw, 1.3rem); }
+  .kcap.rein { animation: auf .35s ease; }
+  .kwort { position: absolute; left: 50%; top: 24%; z-index: 4; transform: translateX(-50%) rotate(-6deg); font-size: clamp(2.6rem, 11vw, 6rem); color: #e02020; -webkit-text-stroke: 3px #111; text-shadow: 6px 6px 0 #111; animation: wortPop .5s cubic-bezier(.2,1.8,.4,1); pointer-events: none; }
+  @keyframes wortPop { from { transform: translateX(-50%) rotate(-6deg) scale(.2); } }
+  .kblase { position: absolute; bottom: 12vh; left: 50%; transform: translateX(-50%); width: min(720px, 86vw); z-index: 5; background: #fff; border: 4px solid #111; border-radius: 22px; box-shadow: 6px 6px 0 #111; padding: 12px 18px 14px; font-size: clamp(1.05rem, 3.2vw, 1.5rem); line-height: 1.35; font-weight: 700; min-height: 3.6em; }
+  .kblase b { display: block; font-style: italic; color: #e02020; font-size: .85em; }
+  .kblase::after { content: ""; position: absolute; top: -26px; width: 0; height: 0; border: 14px solid transparent; border-bottom: 22px solid #111; }
+  .kblase.l::after { left: 18%; } .kblase.r::after { right: 18%; }
+  .kbalken { position: absolute; left: 0; right: 0; height: 8vh; background: #000; z-index: 6; }
+  .kbalken.o { top: 0; } .kbalken.u { bottom: 0; }
+  #kFx { position: absolute; inset: 0; z-index: 7; background: #fff; opacity: 0; pointer-events: none; animation: blitz .5s ease; }
+  @keyframes blitz { 0% { opacity: .95; } 100% { opacity: 0; } }
+  .ktipp { position: absolute; bottom: 2vh; left: 50%; transform: translateX(-50%); z-index: 8; color: #fff; font-weight: 800; opacity: .8; font-size: .95rem; }
+  #kSkip { position: absolute; top: 1.5vh; right: 2vw; z-index: 8; min-height: 40px; font-size: .95rem; }
+  #funk { position: fixed; left: 12px; bottom: max(18px, env(safe-area-inset-bottom)); max-width: min(440px, calc(100vw - 130px)); display: flex; gap: 10px; align-items: center; background: #fff; border: 4px solid #111; border-radius: 14px; box-shadow: 5px 5px 0 #111; padding: 6px 12px 6px 6px; pointer-events: none; animation: pop .35s cubic-bezier(.2,1.6,.4,1); font-size: .95rem; line-height: 1.3; }
+  #funk img { width: 56px; height: 56px; border-radius: 10px; background: #ffd23f; border: 3px solid #111; }
+  .kapitel { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; width: 100%; text-align: left; background: #fff; border: 4px solid #111; border-radius: 14px; box-shadow: 5px 5px 0 #111; padding: 12px 14px; }
+  .kapitel .nr { width: 54px; height: 54px; border-radius: 50%; background: #e02020; color: #fff; display: grid; place-items: center; font-size: 1.6rem; font-weight: 800; font-style: italic; border: 3px solid #111; -webkit-text-stroke: 1.5px #111; paint-order: stroke fill; }
+  .kapitel.zu { opacity: .7; } .kapitel.zu .nr { background: #888; }
+  .kapitel small { color: #555; }
+  @media (max-aspect-ratio: 1/1) { .kfig { height: 50vh; } .kfig.stumm { opacity: 0; } .kfig.l { left: -4vw; } .kfig.r { right: -4vw; } .kblase { bottom: 10vh; } }
+  @media (max-width: 560px) { .kapitel { grid-template-columns: auto 1fr; } .kapitel .btn { grid-column: 1 / -1; } }
   a.zurueck { color: #111; font-weight: 800; text-decoration: none; background: #fff; border: 3px solid #111; border-radius: 8px; padding: 4px 10px; box-shadow: 3px 3px 0 #111; }
 </style>
 </head>
@@ -138,6 +174,19 @@
 </div>
 <div id="banner" class="comic" hidden></div>
 <div id="kofferToast" hidden></div>
+<div id="funk" hidden></div>
+<div id="kino" hidden>
+  <div class="kbild" id="kBild">
+    <img class="kfig l" id="kL" alt="" hidden><img class="kfig r" id="kR" alt="" hidden>
+    <div class="kcap" id="kCap" hidden></div>
+    <div class="kwort comic" id="kWort" hidden></div>
+    <div class="kblase l" id="kBlase" hidden><b id="kWer"></b><span id="kTxt"></span></div>
+  </div>
+  <div id="kFx"></div>
+  <div class="kbalken o"></div><div class="kbalken u"></div>
+  <div class="ktipp">▶ Tippen oder Leertaste</div>
+  <button class="btn ghost" id="kSkip">Überspringen ⏭</button>
+</div>
 <div id="cutin" hidden><div class="band" id="ciBand"><img id="ciImg" alt=""><div class="txt"><b id="ciName"></b><span id="ciUlt"></span></div></div></div>
 
 <div class="screen" id="menu">
@@ -150,6 +199,7 @@
     </div>
     <div class="tabs" role="tablist" id="tabs">
       <button class="tab" role="tab" data-tab="einsatz">🕶️ Einsatz</button>
+      <button class="tab" role="tab" data-tab="story">📖 Story</button>
       <button class="tab" role="tab" data-tab="pass">🎖️ Pass</button>
       <button class="tab" role="tab" data-tab="auftraege">📋 Aufträge</button>
       <button class="tab" role="tab" data-tab="garderobe">👔 Garderobe</button>
@@ -187,6 +237,11 @@
       </div>
       <p class="toast" id="koopFehler" style="color:#e02020;-webkit-text-stroke:0"></p>
     </div>
+    </div>
+    <div class="seite" data-seite="story" hidden>
+      <h2>📖 Staffel 1: Die Akte</h2>
+      <p class="panel">Jemand hat die geheime Lineup-Akte gestohlen – mit den echten Namen aller Agenten. Spielt die Kapitel nacheinander. Vor und nach jedem Einsatz gibt es eine Comic-Szene.</p>
+      <div id="storyListe" style="display:flex;flex-direction:column;gap:12px;width:100%"></div>
     </div>
     <div class="seite" data-seite="pass" hidden>
       <h2 id="passTitel"></h2>
@@ -596,12 +651,13 @@ function alsSpieler(pl, fn) {
   try { return fn(); } finally { speichern(pl); laden(vor); }
 }
 const ich = () => G.id === G.meId;
-function startRun(daily, koop) {
-  const mis = koop ? koop.mission : daily ? DAILY_MISSION : save.mission, info = missionInfo(mis), seed = koop ? koop.seed : daily ? hash(heute()) : (Math.random() * 1e9) | 0;
+function startRun(daily, koop, story) {
+  const K = story ? KAPITEL[story - 1] : null;
+  const mis = K ? K.mul : koop ? koop.mission : daily ? DAILY_MISSION : save.mission, info = K ? { ort: ORTE[K.ort], bike: K.bike } : missionInfo(mis), seed = koop ? koop.seed : daily ? hash(heute()) : (Math.random() * 1e9) | 0;
   G = { daily: !!daily && !koop, coop: !!koop, mis, info, bike: info.bike, sm: missionMul(mis), rs: rng(seed), ru: rng(seed ^ 0x9e3779b9), t: 0,
     xp: 0, lvl: 1, need: needXp(1), kills: 0, bosses: 0, E: [], S: [], EB: [], GM: [], FX: [], TX: [], RG: [], POOL: [], GR: [], STR: [],
     spawnAcc: 0, nextBoss: 120, finaleDa: false, bannerT: 0, flash: 0, wflash: 0, shake: 0, freeze: 0, won: false, neueFusion: [], wortT: 0,
-    FXneu: [], TXneu: [], snapT: 0, eid: 1 };
+    FXneu: [], TXneu: [], snapT: 0, eid: 1, story: story || 0, ende: K ? 240 : RUN_END, funk: K ? K.funk.slice() : [] };
   const liste = koop ? koop.spieler : [{ id: 0, name: spielerName(), agent: save.agent, skin: meinSkin(save.agent), up: save.up, rank: save.rank }];
   G.P = liste.map((sp, i) => spielerNeu(sp, i, liste.length));
   G.meId = koop ? Netz.ich : 0;
@@ -610,7 +666,7 @@ function startRun(daily, koop) {
   pending = 0; stopInput();
   ['menu', 'lvl', 'pause', 'end', 'chest'].forEach(id => $(id).hidden = true);
   $('hud').hidden = false; state = 'play'; last = performance.now();
-  banner((G.coop ? '👥 ' : '') + (info.bike ? '🏍️ VERFOLGUNGSJAGD!' : 'MISSION ' + mis + ': ' + info.ort.name.toUpperCase()), 2);
+  if (K) banner('📖 KAPITEL ' + story + ': ' + K.titel.toUpperCase(), 2.5); else banner((G.coop ? '👥 ' : '') + (info.bike ? '🏍️ VERFOLGUNGSJAGD!' : 'MISSION ' + mis + ': ' + info.ort.name.toUpperCase()), 2);
   sfx('go', 330, .25, 'square', .05, 500);
 }
 // Im Koop halten die Gegner mehr aus, damit es spannend bleibt
@@ -638,8 +694,9 @@ function spawnEnemy(type, ang, dist, extra) {
   const e = { id: g.eid++, t: type, x: an.px + Math.cos(a) * d, y: an.py + Math.sin(a) * d, hp, mhp: hp, r: T.r, kx: 0, ky: 0, fl: 0, oh: -9, rh: -9, ft: 1 + g.rs() * 2, dc: 1 + g.rs() * 2, dt: 0, vx: 0, vy: 0, stun: 0, walk: g.rs() * 4, wx: 0, wy: 0 };
   if (extra) Object.assign(e, extra);
   if (e.elite) { e.hp *= 5; e.mhp = e.hp; e.r *= 1.3; }
-  if (type === 'boss') e.name = BOSSE[(g.bosses + g.mis) % BOSSE.length];
+  if (type === 'boss') e.name = g.story ? KAPITEL[g.story - 1].boss : BOSSE[(g.bosses + g.mis) % BOSSE.length];
   if (type === 'mother') e.name = FINALE[(g.mis - 1) % FINALE.length];
+  if (type === 'mother' && g.story) { const f = KAPITEL[g.story - 1].finale; e.name = STORY_FIGUREN[f].name; e.fig = 'v_' + f; }
   g.E.push(e); return e;
 }
 // Neue Gegner tauchen rund um einen zufälligen Agenten auf, der noch steht
@@ -659,8 +716,8 @@ function spawnTick(dt) {
     else if (te > 160 && r > 0.7) spawnEnemy('dasher', undefined, undefined, elite);
     else spawnEnemy('drift', undefined, undefined, elite);
   }
-  if (g.t >= g.nextBoss && g.nextBoss < RUN_END) { g.nextBoss += 120; const b = spawnEnemy('boss'); banner('⚠ ' + b.name.toUpperCase() + ' ⚠'); knall('boss', .6, .35, 300); }
-  if (g.t >= RUN_END && !g.finaleDa) { g.finaleDa = true; const b = spawnEnemy('mother'); banner('☠ ' + b.name.toUpperCase() + ' ☠', 3); g.shake = .6; knall('boss', 1, .45, 200); }
+  if (g.t >= g.nextBoss && g.nextBoss < g.ende) { g.nextBoss += 120; const b = spawnEnemy('boss'); banner('⚠ ' + b.name.toUpperCase() + ' ⚠'); knall('boss', .6, .35, 300); }
+  if (g.t >= g.ende && !g.finaleDa) { g.finaleDa = true; const b = spawnEnemy('mother'); banner('☠ ' + b.name.toUpperCase() + ' ☠', 3); g.shake = .6; knall('boss', 1, .45, 200); }
 }
 function enemyShot(e, a, sp) { if (G.EB.length < 220) G.EB.push({ x: e.x, y: e.y - e.r, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 4, d: TYPES[e.t].dmg * G.sm.dmg * 0.8 }); }
 
@@ -879,6 +936,7 @@ function update(dt) {
   if (g.bannerT <= 0) $('banner').hidden = true;
 
   spawnTick(dt);
+  if (g.funk.length && g.t >= g.funk[0].t) zeigeFunk(g.funk.shift());
   for (const pl of g.P) alsSpieler(pl, () => spielerTick(dt));
   objekteTick(dt);
 
@@ -1085,12 +1143,17 @@ function finish(win) {
   if (g.daily && save.daily.day !== day) { bonus = 40; coins += bonus; save.daily = { day, best: 0 }; }
   let dBest = false; if (g.daily && score > save.daily.best) { save.daily.best = score; dBest = true; }
   const newBest = score > save.best; if (newBest) save.best = score;
-  let neu = false; if (win && !g.daily && g.mis === save.maxMission) { save.maxMission++; save.mission = save.maxMission; neu = true; }
+  let neu = false; if (win && !g.daily && !g.story && g.mis === save.maxMission) { save.maxMission++; save.mission = save.maxMission; neu = true; }
   const rx = Math.max(10, Math.round(score / 20)); let rangUp = 0; save.rxp += rx;
   while (save.rxp >= rankNeed(save.rank)) { save.rxp -= rankNeed(save.rank); save.rank++; rangUp++; }
   save.coins += coins; save.runs++; persist();
   const fort = fortschrittNachEinsatz({ kills: g.kills, bosse: g.bosses, zeit: g.t, win, agent: g.me.agent, koop: g.coop, bike: g.bike, ultis: g.stUlti || 0, koffer: g.stKoffer || 0 });
-  $('endTitle').textContent = win ? (g.daily ? 'TAGESMISSION ERFÜLLT!' : (g.coop ? 'TEAM-' : '') + 'MISSION ' + g.mis + ' ERFÜLLT!') : g.coop ? 'TEAM AUSGESCHALTET!' : 'AGENT AUSGESCHALTET!';
+  let storyBonus = '';
+  if (g.story && win && storyStand().fertig < g.story) {
+    save.story.fertig = g.story; save.coins += 250; save.kisten += 1; passStand().xp += 500; persist();
+    storyBonus = '<span class="neu">📖 Kapitel ' + g.story + ' geschafft! Bonus: +250 💰 · +1 🎁 · +500 Pass-XP' + (g.story < KAPITEL.length ? ' · Kapitel ' + (g.story + 1) + ' freigeschaltet!' : '') + '</span><br>';
+  }
+  $('endTitle').textContent = g.story ? (win ? 'KAPITEL ' + g.story + ' GESCHAFFT!' : 'MISSION GESCHEITERT!') : win ? (g.daily ? 'TAGESMISSION ERFÜLLT!' : (g.coop ? 'TEAM-' : '') + 'MISSION ' + g.mis + ' ERFÜLLT!') : g.coop ? 'TEAM AUSGESCHALTET!' : 'AGENT AUSGESCHALTET!';
   let h = '<b style="font-size:2rem">' + fmt(score) + ' Punkte</b><br>';
   h += newBest ? '<span class="neu">Neuer Rekord!</span><br>' : dBest ? '<span class="neu">Neuer Tages-Bestwert!</span><br>' : 'Rekord: ' + fmt(save.best) + '<br>';
   h += '⏱ ' + zeit(g.t) + ' · 💀 ' + g.kills + ' · 😈 Bosse ' + g.bosses + '<br>';
@@ -1098,12 +1161,15 @@ function finish(win) {
   h += '⭐ +' + rx + ' Rang-XP' + (rangUp ? ' – <span class="neu">Agenten-Rang ' + save.rank + '! Du bist dauerhaft stärker.</span>' : '') + '<br>';
   if (neu) { const mi = missionInfo(save.maxMission); h += '<span class="neu">🔓 Mission ' + save.maxMission + ' freigeschaltet: ' + mi.ort.name + (mi.bike ? ' (Verfolgungsjagd!)' : '') + '</span><br>'; }
   if (g.neueFusion.length) h += '<span class="fusion">📖 Neue Fusion: ' + g.neueFusion.map(id => EVO[id].name).join(', ') + '</span><br>';
-  if (!win && g.t < RUN_END) h += '<small>Noch ' + zeit(RUN_END - g.t) + ' bis zum Oberschurken. Hol dir neue Ausrüstung!</small>';
+  if (!win && g.t < (g.ende || RUN_END)) h += '<small>Noch ' + zeit((g.ende || RUN_END) - g.t) + ' bis zum Oberschurken. Hol dir neue Ausrüstung!</small>';
+  h += storyBonus;
   h += '🎖️ +' + fort.xp + ' Pass-XP' + (fort.stufen ? ' – <span class="neu">' + fort.stufen + ' neue Pass-Stufe' + (fort.stufen > 1 ? 'n' : '') + ' zum Abholen!</span>' : '') + '<br>';
   if (fort.fertig.length) h += '<span class="neu">📋 Auftrag erfüllt: ' + fort.fertig.join(' · ') + ' – im Menü abholen!</span><br>';
   if (g.coop) h += '<br><small>' + (g.gast ? 'Der Host kann sofort den nächsten Einsatz starten.' : 'Mit „Nochmal“ startet dein Team direkt den nächsten Einsatz.') + '</small>';
   $('endStats').innerHTML = h; $('end').hidden = false;
   $('again').hidden = !!g.gast;
+  $('funk').hidden = true;
+  if (g.story && win) { $('end').hidden = true; const k = KAPITEL[g.story - 1]; setTimeout(() => kinoSpielen(k.outro, () => { $('end').hidden = false; }), 700); }
   sfx('end', win ? 600 : 200, .5, 'square', .06, win ? 500 : -120);
 }
 
@@ -1189,7 +1255,7 @@ function beuteMalen(m) {
   else { const gross = m.v >= 5, s = gross ? 9 : 6, y = m.y - 10 + b; ctx.fillStyle = gross ? '#ffd23f' : '#2fb8ff'; ctx.beginPath(); ctx.moveTo(m.x, y - s * 1.3); ctx.lineTo(m.x + s, y); ctx.lineTo(m.x, y + s * 1.3); ctx.lineTo(m.x - s, y); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.fillStyle = 'rgba(255,255,255,.8)'; ctx.fillRect(m.x - 2, y - s * .7, 3, s * .6); }
 }
 function gegnerMalen(e) {
-  const g = G, T = TYPES[e.t], bilder = FIG['e_' + e.t], sc = e.elite ? 1.3 : 1;
+  const g = G, T = TYPES[e.t], bilder = FIG[e.fig || ('e_' + e.t)], sc = e.elite ? 1.3 : 1;
   schatten(e.x, e.y, e.r * (T.hund ? 1.4 : 1.1));
   if (e.t === 'mother') { const y = e.y - 6 + Math.sin(g.t * 2) * 4; ctx.strokeStyle = OUT; ctx.lineWidth = 4; ctx.fillStyle = '#3a3f4c'; ctx.beginPath(); ctx.ellipse(e.x, y, 70, 22, 0, 0, 6.283); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#ffd23f'; for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.arc(e.x + i * 24, y + 4, 4, 0, 6.283); ctx.fill(); ctx.stroke(); } ctx.fillStyle = 'rgba(255,140,40,.7)'; ctx.beginPath(); ctx.ellipse(e.x, y + 24, 30 + Math.random() * 6, 8, 0, 0, 6.283); ctx.fill(); }
   if (e.elite) { ctx.strokeStyle = '#ffd23f'; ctx.lineWidth = 5; ctx.beginPath(); ctx.ellipse(e.x, e.y, e.r * 1.4, e.r * .5, 0, 0, 6.283); ctx.stroke(); }
@@ -1288,14 +1354,14 @@ function fxMalen(f) {
 }
 function hud() {
   const g = G; $('hpf').style.width = Math.max(0, g.hp / g.maxhp * 100) + '%'; $('xpf').style.width = (g.xp / g.need * 100) + '%';
-  $('hLv').textContent = 'LV ' + g.lvl; $('hMis').textContent = g.daily ? '📅 Tagesmission' : (g.bike ? '🏍️ ' : '') + 'Mission ' + g.mis;
-  $('hTime').textContent = g.t < RUN_END ? zeit(g.t) + ' / 6:00' : '☠ ' + zeit(g.t); $('hKills').textContent = '💀 ' + g.kills;
+  $('hLv').textContent = 'LV ' + g.lvl; $('hMis').textContent = g.story ? '📖 Kapitel ' + g.story : g.daily ? '📅 Tagesmission' : (g.bike ? '🏍️ ' : '') + 'Mission ' + g.mis;
+  const ende = g.ende || RUN_END; $('hTime').textContent = g.t < ende ? zeit(g.t) + ' / ' + zeit(ende) : '☠ ' + zeit(g.t); $('hKills').textContent = '💀 ' + g.kills;
   const u = $('ultBtn'); u.style.setProperty('--p', g.ulti + '%'); u.classList.toggle('voll', g.ulti >= 100 && !g.ultMode);
 }
 
 function loop(now) {
   requestAnimationFrame(loop);
-  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  const dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now;
   const laeuft = state === 'play' || (G && G.coop && state === 'pause');
   if (G && G.gast && state !== 'menu' && state !== 'end') { updateGast(dt, laeuft); hud(); }
   else if (laeuft) { if (G.freeze > 0) G.freeze -= dt; else update(dt); if (G && state !== 'end') hud(); }
@@ -1321,13 +1387,285 @@ $('quit').onclick = () => {
   finish(false);
 };
 document.addEventListener('visibilitychange', () => { if (document.hidden) pauseGame(); });
-$('again').onclick = () => { if (G && G.coop) { if (!G.gast) Netz.senden({ t: 'start', mission: G.mis }); return; } startRun(!!(G && G.daily)); };
+$('again').onclick = () => { if (G && G.story) return startRun(false, null, G.story); if (G && G.coop) { if (!G.gast) Netz.senden({ t: 'start', mission: G.mis }); return; } startRun(!!(G && G.daily)); };
 $('toMenu').onclick = () => { $('end').hidden = true; state = 'menu'; G = null; renderMenu(); $('menu').hidden = false; };
 $('play').onclick = () => startRun(false);
 $('daily').onclick = () => startRun(true);
 $('mute').onclick = () => { save.muted = !save.muted; persist(); renderMenu(); };
 let toastT = 0;
 function toast(t) { $('toast').textContent = t; clearTimeout(toastT); toastT = setTimeout(() => $('toast').textContent = '', 2600); }
+
+/* =========================================================
+   STORY – „Codename: Lineup – Die Akte“ (Staffel 1)
+   Zwischenszenen als Comic-Kino: Figuren, Sprechblasen, Effekte.
+   ========================================================= */
+const STORY_FIGUREN = {
+  null: { name: 'Agentin Null', look: { skin: '#f2c9ae', hair: '#2a1a12', style: 'lang', suit: '#2f3a4a', shirt: '#fff', tie: '#e02020', brille: 'sonne' } },
+  chaos: { name: 'Dr. Chaos', look: { skin: '#f2c8b0', hair: '#eeeeee', style: 'wuschel', suit: '#e8e8e8', shirt: '#5a1a7a', tie: '#2fd04a', brille: 'labor' }, grinsen: true },
+  baronin: { name: 'Die Baronin', look: { skin: '#f0c4a6', hair: '#7a1a2a', style: 'lang', suit: '#5a1a7a', shirt: '#111', tie: '#ffd23f', brille: 'monokel', umhang: '#c01818' } },
+  grimm: { name: 'General Grimm', look: { skin: '#d9a47c', hair: '#555', style: 'kurz', suit: '#4a5a3a', shirt: '#2e3a24', tie: '#c01818', hut: 'cap', hutCol: '#2e3a24', brille: 'sonne' }, bauch: true },
+  direktor: { name: 'Der Direktor', look: { skin: '#e8b896', hair: '#111', style: 'glatze', suit: '#c8a020', shirt: '#111', tie: '#111', brille: 'sonne', umhang: '#111' }, bauch: true }
+};
+for (const k in STORY_FIGUREN) { const F = STORY_FIGUREN[k]; figurBilder('v_' + k, F.look, { scale: 2.5, bauch: F.bauch }); }
+const STORY_PORTRAITS = {};
+function figurPortrait(wer) {
+  if (AGENTEN[wer]) return portrait(wer, meinSkin(wer));
+  if (STORY_PORTRAITS[wer]) return STORY_PORTRAITS[wer];
+  const F = STORY_FIGUREN[wer], c = document.createElement('canvas'); c.width = c.height = 160; const x = c.getContext('2d');
+  x.translate(80, 150); x.scale(1.75, 1.75); figurZeichnen(x, F.look, { bauch: F.bauch, grinsen: F.grinsen }, 0);
+  return STORY_PORTRAITS[wer] = c.toDataURL();
+}
+// Große, scharfe Figuren fürs Kino
+const KINO_BILDER = {};
+function kinoBild(wer) {
+  const ag = AGENTEN[wer], skin = ag ? meinSkin(wer) : '', k = wer + '_' + skin;
+  if (KINO_BILDER[k]) return KINO_BILDER[k];
+  const F = ag ? { look: agentLook(wer, skin), bauch: ag.bauch } : STORY_FIGUREN[wer];
+  const c = document.createElement('canvas'); c.width = c.height = 520; const x = c.getContext('2d');
+  x.translate(260, 490); x.scale(5.6, 5.6); figurZeichnen(x, F.look, { bauch: F.bauch, grinsen: F.grinsen || !!ag }, 0);
+  return KINO_BILDER[k] = c.toDataURL();
+}
+const figName = wer => AGENTEN[wer] ? AGENTEN[wer].name : STORY_FIGUREN[wer] ? STORY_FIGUREN[wer].name : '';
+const KINO_BG = {
+  hq: 'linear-gradient(160deg, #1d2233, #3a4a7a)', video: 'linear-gradient(160deg, #04261c, #0a5a3a)',
+  0: 'linear-gradient(170deg, #0f1a33, #5d6475)', 1: 'linear-gradient(170deg, #7fd6c8, #d7dee8)', 2: 'linear-gradient(170deg, #3a0612, #8a1f2e)',
+  3: 'linear-gradient(170deg, #f6c343, #c8864a)', 4: 'linear-gradient(170deg, #05051a, #2a2f4a)'
+};
+
+// Jeder Schritt: cap = Erzählkasten, ort = Hintergrund, l/r = Figur links/rechts, s = wer spricht, t = Text,
+// fx = shake | flash | boom | zoom, w = Comic-Wort, akt = Speed-Lines
+const KAPITEL = [
+  { titel: 'Die Akte', ort: 0, bike: false, mul: 1, boss: 'Der Kranführer', finale: 'chaos',
+    teaser: 'Die geheime Lineup-Akte wurde gestohlen. Darin: die echten Namen aller Agenten.',
+    intro: [
+      { ort: 'hq', cap: 'Geheimes Hauptquartier unter der Schule. 07:42 Uhr.', l: 'matteo', r: 'null', s: 'r', t: 'Guten Morgen, Agenten. Ich bin Agentin Null – eure neue Einsatzleitung.' },
+      { s: 'l', t: 'Neue Einsatzleitung? Davon hat uns keiner was gesagt.' },
+      { s: 'r', t: 'Genau so funktioniert Geheimhaltung, Matteo. Und jetzt hört gut zu.' },
+      { s: 'r', t: 'Heute Nacht wurde die LINEUP-AKTE gestohlen. Darin stehen eure echten Namen. Alle.', fx: 'shake', w: '!?' },
+      { l: 'timo', s: 'l', t: 'Alle Namen? Auch meiner?' },
+      { l: 'omar', s: 'l', t: 'Ich hab einen Funkspruch abgefangen. Hafen, Container 17. Und ein Name: Dr. Chaos.' },
+      { l: 'felix', s: 'l', t: 'Gibt es am Hafen was zu essen?' },
+      { l: 'matteo', s: 'l', t: 'Felix. Konzentration. Wir holen uns die Akte zurück.' },
+      { ort: 0, cap: 'Hafen. 23:58 Uhr.', r: 'mo', s: 'r', t: 'Container 17 ist da hinten. Und da sind ziemlich viele Leute mit roten Masken.' },
+      { s: 'l', t: 'Team Lineup – Einsatz!', w: 'LOS!', akt: true, fx: 'zoom' }
+    ],
+    funk: [
+      { t: 4, wer: 'null', txt: 'Container 17 liegt im Süden. Haltet die Handlanger auf!' },
+      { t: 55, wer: 'omar', txt: 'Da kommen immer mehr … die wussten, dass wir kommen.' },
+      { t: 117, wer: 'null', txt: 'Vorsicht! Der Kranführer kommt – mit sehr großen Händen.' },
+      { t: 190, wer: 'julian', txt: 'Ich messe hier eine komische Chemikalie. Irgendwer kocht was.' },
+      { t: 236, wer: 'matteo', txt: 'Da ist er. Dr. Chaos. Schnappt ihn euch!' }
+    ],
+    outro: [
+      { ort: 0, cap: 'Container 17.', l: 'matteo', r: 'chaos', s: 'r', t: 'Ihr seid zu spät, Agenten! Die Akte ist längst weg!', fx: 'shake' },
+      { s: 'l', t: 'Wo ist sie, Chaos?' },
+      { s: 'r', t: 'Beim Syndikat! Und das Syndikat vergisst nie einen Namen. HAHAHA!' },
+      { r: '', cap: 'Dr. Chaos verschwindet in einer Rauchwolke.', w: 'PUFF!', fx: 'flash' },
+      { l: 'julian', s: 'l', t: 'Rauchbombe. Billig gemacht. Amateur.' },
+      { r: 'mo', s: 'r', t: 'Leute … im Container lag nur ein Zettel.' },
+      { cap: 'Auf dem Zettel steht: „WIR KENNEN EURE NAMEN.“', fx: 'shake', w: '!?' },
+      { l: 'matteo', s: 'l', t: 'Das ist erst der Anfang.' }
+    ] },
+  { titel: 'Jagd durchs Labor', ort: 1, bike: true, mul: 2, boss: 'Der Laborant', finale: 'chaos',
+    teaser: 'Dr. Chaos flieht mit einem Wagen aus seinem Geheimlabor. Zum ersten Mal: Motorräder.',
+    intro: [
+      { ort: 'hq', cap: 'Hauptquartier. Am nächsten Morgen.', l: 'julian', r: 'null', s: 'r', t: 'Dr. Chaos hat ein Geheimlabor. Gleich fährt dort ein Wagen los – vielleicht mit der Akte.' },
+      { s: 'l', t: 'Wenn er Chemie kann, kann ich sie besser.' },
+      { l: 'timo', s: 'l', t: 'Und wie sollen wir einen Wagen einholen? Zu Fuß?' },
+      { s: 'r', t: 'Nehmt die Motorräder.' },
+      { s: 'l', t: 'Wir haben MOTORRÄDER?!', w: 'WROOM!', fx: 'zoom' },
+      { l: 'damon', s: 'l', t: 'Endlich. Ich sag schon lange: Wir brauchen mehr Lärm.' },
+      { ort: 1, cap: 'Geheimlabor. Die Tore öffnen sich.', l: 'matteo', r: '', s: 'l', t: 'Gebt Gas!', akt: true, w: 'VROOOM!' }
+    ],
+    funk: [
+      { t: 4, wer: 'null', txt: 'Rammt alles, was euch im Weg steht!' },
+      { t: 60, wer: 'julian', txt: 'Die grünen Fässer … nicht anfassen. Auf gar keinen Fall anfassen.' },
+      { t: 117, wer: 'omar', txt: 'Da kommt einer im Kittel! Das muss der Laborant sein!' },
+      { t: 180, wer: 'null', txt: 'Der Wagen ist direkt vor euch. Nicht abhängen lassen!' },
+      { t: 236, wer: 'damon', txt: 'Chaos steigt aus! Jetzt wird es laut!' }
+    ],
+    outro: [
+      { ort: 1, l: 'julian', r: 'chaos', s: 'r', t: 'Nein, nein, NEIN! Meine wunderschöne Formel!', fx: 'boom', w: 'KAWUMM!' },
+      { s: 'l', t: 'Deine Formel hatte einen Fehler. Natrium und Wasser. Das knallt.' },
+      { r: '', cap: 'Chaos entkommt durch einen Lüftungsschacht. Im Wagen: keine Akte. Nur ein goldener Chip.' },
+      { l: 'mo', s: 'l', t: 'Ein Casino-Chip. Da steht „Casino Baronin“ drauf.' },
+      { r: 'omar', s: 'r', t: 'Die Baronin? Der gehört das größte Casino der Stadt.' },
+      { ort: 'hq', l: 'matteo', r: 'null', s: 'r', t: 'Gute Arbeit. Um Chaos kümmere ich mich. Ihr ruht euch aus.' },
+      { s: 'l', t: '(Irgendwas stimmt hier nicht …)' }
+    ] },
+  { titel: 'All In', ort: 2, bike: false, mul: 3, boss: 'Der Croupier', finale: 'baronin',
+    teaser: 'Undercover im Casino der Baronin. Doch jemand hat das Team verraten.',
+    intro: [
+      { ort: 2, cap: 'Casino „Baronin“. Abendgarderobe ist Pflicht.', l: 'mo', r: 'timo', s: 'l', t: 'Undercover. Mein Lieblingswort.' },
+      { s: 'r', t: 'Warum muss ausgerechnet ich den weißen Smoking tragen?' },
+      { l: 'damon', s: 'l', t: 'Weil du sonst aussiehst wie ein Kapitän.' },
+      { s: 'r', t: 'Ich BIN Kapitän.' },
+      { l: 'matteo', r: 'baronin', s: 'r', t: 'Willkommen, meine Herren. Ich habe Sie bereits … erwartet.', fx: 'shake' },
+      { s: 'l', t: 'Woher wusste sie, dass wir kommen?' },
+      { s: 'r', t: 'Ein kleiner Vogel hat es mir gezwitschert. WACHEN!', w: 'ALARM!', fx: 'flash' }
+    ],
+    funk: [
+      { t: 4, wer: 'omar', txt: 'Das ist eine Falle! Jemand hat uns verraten!' },
+      { t: 58, wer: 'null', txt: 'Haltet durch … ich schicke Verstärkung. Irgendwann.' },
+      { t: 117, wer: 'sinan', txt: 'Der Croupier! Den nehm ich mir vor.' },
+      { t: 195, wer: 'omar', txt: 'Ich hab ihre Funkfrequenz! Sie redet mit einer Agentin … aus unserem Team?' },
+      { t: 236, wer: 'matteo', txt: 'Die Baronin kommt selbst. Alles auf eine Karte!' }
+    ],
+    outro: [
+      { ort: 2, l: 'sinan', r: 'baronin', s: 'r', t: 'Ihr glaubt, ihr habt gewonnen? Ihr habt einen MAULWURF in eurem Team!', fx: 'shake' },
+      { s: 'l', t: 'Einen Maulwurf? Sag den Namen!' },
+      { s: 'r', t: 'Fragt doch eure liebe Einsatzleitung …' },
+      { r: '', cap: 'Die Baronin verschwindet hinter einer Geheimtür.', w: 'KLACK!' },
+      { l: 'omar', s: 'l', t: 'Leute. Die Frequenz von vorhin … sie kam aus unserem Hauptquartier.' },
+      { l: 'matteo', s: 'l', t: 'Agentin Null.' },
+      { ort: 'hq', l: '', cap: 'Hauptquartier. Der Platz von Agentin Null ist leer. Und Timo ist verschwunden.', fx: 'shake', w: '!?' }
+    ] },
+  { titel: 'Sandsturm', ort: 3, bike: false, mul: 4, boss: 'Der Sandmann', finale: 'grimm',
+    teaser: 'Timo wurde entführt. Die Spur führt in die Wüstenbasis Omega.',
+    intro: [
+      { ort: 'video', cap: 'Eine Videonachricht.', r: 'null', s: 'r', t: 'Hallo, Team. Ich habe euren Käpt’n. Wenn ihr ihn wollt: Wüstenbasis Omega.' },
+      { l: 'matteo', s: 'l', t: 'Du hast uns die ganze Zeit belogen!' },
+      { s: 'r', t: 'Ich habe euch beobachtet. Der Direktor wollte wissen, wie gut ihr seid. Ihr seid … unterhaltsam.' },
+      { cap: 'Die Nachricht bricht ab.', r: '', fx: 'flash' },
+      { ort: 'hq', l: 'felix', s: 'l', t: 'Niemand entführt Timo. NIEMAND.', fx: 'shake', w: 'GRRR!' },
+      { r: 'sinan', s: 'r', t: 'Ich geh vor. Wer Timo was tut, lernt meinen Knie-Sprung kennen.' },
+      { ort: 3, cap: 'Wüstenbasis Omega. 41 Grad im Schatten.', l: 'julian', r: '', s: 'l', t: 'Bei der Hitze verdampft sogar meine Laune.', akt: true }
+    ],
+    funk: [
+      { t: 4, wer: 'omar', txt: 'Ich hab Timos Signal! Er ist im Bunker in der Mitte!' },
+      { t: 60, wer: 'damon', txt: 'Sand in den Stiefeln. Sand in der Gitarre. Ich hasse Wüsten.' },
+      { t: 117, wer: 'omar', txt: 'Achtung, der Sandmann! Nicht einschlafen!' },
+      { t: 175, wer: 'timo', txt: 'Hallo? HALLO! Ich bin hier unten! Und ich hab Hunger!' },
+      { t: 183, wer: 'felix', txt: 'Halt durch, Timo! Ich hab dir Kekse aufgehoben! … Fast alle.' },
+      { t: 236, wer: 'matteo', txt: 'General Grimm persönlich. Holen wir uns unseren Käpt’n!' }
+    ],
+    outro: [
+      { ort: 3, l: 'matteo', r: 'grimm', s: 'r', t: 'Unmöglich! Meine ganze Armee! Besiegt von … euch?', fx: 'boom' },
+      { l: 'timo', s: 'l', t: 'Von Agenten. Wir sind Agenten.', w: 'ZACK!' },
+      { l: 'matteo', s: 'l', t: 'Wo ist der Direktor, Grimm?' },
+      { s: 'r', t: 'Ganz oben. Im höchsten Turm der Stadt. Heute Nacht verkauft er die Akte an alle Schurken der Welt.' },
+      { l: 'omar', r: '', s: 'l', t: 'Heute Nacht?! Dann haben wir keine Zeit mehr.' },
+      { l: 'matteo', r: 'timo', s: 'l', t: 'Team Lineup. Ein letzter Einsatz.' },
+      { s: 'r', t: 'Und danach essen wir was. Ich mein’s ernst.' }
+    ] },
+  { titel: 'Der Direktor', ort: 4, bike: false, mul: 5, boss: 'Agentin Null', finale: 'direktor',
+    teaser: 'Der höchste Turm der Stadt. Mitternacht. Der Direktor wartet.',
+    intro: [
+      { ort: 4, cap: 'Der höchste Turm der Stadt. 23:59 Uhr.', l: 'matteo', r: 'direktor', s: 'r', t: 'Willkommen, Team Lineup. Ich habe so lange auf euch gewartet.' },
+      { r: 'null', s: 'r', t: 'Sie haben es tatsächlich bis hierher geschafft, Direktor.' },
+      { r: 'direktor', s: 'r', t: 'Natürlich. Ich habe sie ja ausgesucht.', fx: 'shake' },
+      { s: 'l', t: 'Ausgesucht? Was soll das heißen?' },
+      { s: 'r', t: 'Die Lineup-Akte wurde nie gestohlen. Ich habe sie geschrieben. Jeder von euch wurde von mir … getestet.' },
+      { l: 'julian', s: 'l', t: 'Okay. Das ist jetzt wirklich unheimlich.' },
+      { s: 'r', t: 'Schließt euch mir an – oder fallt!', w: 'KRACH!', fx: 'flash' },
+      { l: 'matteo', s: 'l', t: 'Wir sind kein Experiment. Wir sind ein Team.', akt: true, w: 'LINEUP!', fx: 'zoom' }
+    ],
+    funk: [
+      { t: 4, wer: 'omar', txt: 'Wir müssen ganz nach oben! Haltet die Wachen auf!' },
+      { t: 60, wer: 'mo', txt: 'Ich bin unsichtbar … ich bin unsichtbar … oh. Die sehen mich.' },
+      { t: 117, wer: 'null', txt: 'Ihr kommt nicht an mir vorbei. Nicht dieses Mal.' },
+      { t: 200, wer: 'matteo', txt: 'Gleich sind wir oben. Gebt alles, was ihr habt!' },
+      { t: 236, wer: 'direktor', txt: 'Dann zeigt mir, was ich erschaffen habe.' }
+    ],
+    outro: [
+      { ort: 4, l: 'matteo', r: 'direktor', s: 'r', t: 'Das … war nicht … in meinem Plan.', fx: 'boom', w: 'KAWUMM!' },
+      { r: '', cap: 'Die Lineup-Akte fällt aus seinem Mantel.', s: 'l', t: 'Die Akte. Endlich.' },
+      { l: 'felix', s: 'l', t: 'Steht da auch drin, wo es hier was zu essen gibt?' },
+      { l: 'matteo', r: 'omar', s: 'r', t: 'Matteo … blätter mal auf die letzte Seite.' },
+      { cap: 'Letzte Seite: „PROJEKT LINEUP – PHASE 2 BEGINNT BALD.“', fx: 'shake', w: '!?' },
+      { r: 'direktor', s: 'r', t: 'Ihr habt nur … das Tutorial bestanden.', fx: 'flash' },
+      { l: '', r: '', cap: 'ENDE VON STAFFEL 1 – Fortsetzung folgt …' }
+    ] }
+];
+
+/* ---------- Kino-Engine ---------- */
+let KINO = null, stateVorKino = 'menu';
+function kinoSpielen(beats, fertig) {
+  KINO = { beats, i: -1, fertig, l: '', r: '', tipp: null, voll: '' };
+  stateVorKino = state; state = 'kino'; stopInput();
+  $('kL').removeAttribute('src'); $('kR').removeAttribute('src'); $('kL').hidden = $('kR').hidden = true;
+  $('kino').hidden = false; kinoWeiter();
+}
+function kinoFigur(seite, wer) {
+  const el = $(seite === 'l' ? 'kL' : 'kR');
+  if (KINO[seite] === wer) return;
+  KINO[seite] = wer;
+  if (!wer) { el.hidden = true; return; }
+  el.src = kinoBild(wer); el.alt = figName(wer); el.hidden = false;
+  el.classList.remove('rein'); void el.offsetWidth; el.classList.add('rein');
+}
+function kinoWeiter() {
+  const K = KINO; if (!K) return;
+  if (K.tipp) { clearInterval(K.tipp); K.tipp = null; $('kTxt').textContent = K.voll; return; }
+  K.i++;
+  if (K.i >= K.beats.length) return kinoEnde();
+  const b = K.beats[K.i], bild = $('kBild');
+  if (b.ort !== undefined) bild.style.background = KINO_BG[b.ort] || KINO_BG.hq;
+  if (b.l !== undefined) kinoFigur('l', b.l);
+  if (b.r !== undefined) kinoFigur('r', b.r);
+  bild.classList.toggle('akt', !!b.akt);
+  $('kL').classList.toggle('stumm', b.s !== 'l'); $('kR').classList.toggle('stumm', b.s !== 'r');
+  const cap = $('kCap'); cap.hidden = !b.cap; if (b.cap) { cap.textContent = b.cap; cap.classList.remove('rein'); void cap.offsetWidth; cap.classList.add('rein'); }
+  const w = $('kWort'); w.hidden = !b.w; if (b.w) { w.textContent = b.w; w.style.animation = 'none'; void w.offsetWidth; w.style.animation = ''; }
+  bild.classList.remove('shake', 'zoom'); void bild.offsetWidth;
+  if (b.fx === 'shake' || b.fx === 'boom') { bild.classList.add('shake'); knall('kino', b.fx === 'boom' ? .6 : .25, b.fx === 'boom' ? .4 : .15, b.fx === 'boom' ? 500 : 1500); }
+  if (b.fx === 'zoom') bild.classList.add('zoom');
+  if (b.fx === 'flash' || b.fx === 'boom') { const f = $('kFx'); f.style.animation = 'none'; void f.offsetWidth; f.style.animation = ''; }
+  if (b.w) sfx('wort', 300, .25, 'square', .05, 400);
+  const blase = $('kBlase');
+  if (b.t) {
+    const wer = b.s === 'l' ? K.l : K.r;
+    blase.hidden = false; blase.className = 'kblase ' + (b.s === 'r' ? 'r' : 'l');
+    $('kWer').textContent = figName(wer); $('kTxt').textContent = '';
+    K.voll = b.t; let n = 0;
+    K.tipp = setInterval(() => {
+      n += 2; $('kTxt').textContent = K.voll.slice(0, n);
+      if (n % 6 === 0) sfx('tipp', 520 + Math.random() * 80, .03, 'square', .012);
+      if (n >= K.voll.length) { clearInterval(K.tipp); K.tipp = null; }
+    }, 28);
+  } else blase.hidden = true;
+}
+function kinoEnde() {
+  const K = KINO; if (!K) return;
+  if (K.tipp) clearInterval(K.tipp);
+  KINO = null; $('kino').hidden = true;
+  if (state === 'kino') state = stateVorKino;
+  if (K.fertig) K.fertig();
+}
+$('kino').addEventListener('click', e => { if (e.target.id !== 'kSkip') kinoWeiter(); });
+$('kSkip').onclick = e => { e.stopPropagation(); kinoEnde(); };
+addEventListener('keydown', e => { if (state === 'kino' && (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight')) { e.preventDefault(); kinoWeiter(); } if (state === 'kino' && e.key === 'Escape') kinoEnde(); });
+
+/* ---------- Funksprüche während eines Story-Einsatzes ---------- */
+function zeigeFunk(f) {
+  const el = $('funk');
+  el.innerHTML = '<img src="' + figurPortrait(f.wer) + '" alt=""><div><b>📻 ' + figName(f.wer) + '</b><br>' + f.txt + '</div>';
+  el.hidden = false; el.style.animation = 'none'; void el.offsetWidth; el.style.animation = '';
+  sfx('funk', 900, .08, 'square', .03, -300);
+  clearTimeout(zeigeFunk.t); zeigeFunk.t = setTimeout(() => { el.hidden = true; }, 5000);
+}
+
+/* ---------- Story-Menü ---------- */
+function storyStand() { if (!save.story || typeof save.story !== 'object') save.story = { fertig: 0 }; return save.story; }
+function storyStarten(nr) {
+  const k = KAPITEL[nr - 1]; if (!k) return;
+  if (koopRaum) return toast('Die Story spielst du allein – verlass dafür kurz den Koop-Raum.');
+  kinoSpielen(k.intro, () => startRun(false, null, nr));
+}
+function renderStory() {
+  const st = storyStand(), box = $('storyListe'); box.innerHTML = '';
+  KAPITEL.forEach((k, i) => {
+    const nr = i + 1, frei = nr <= st.fertig + 1, fertig = nr <= st.fertig, d = document.createElement('div');
+    d.className = 'kapitel' + (frei ? '' : ' zu');
+    d.innerHTML = '<div class="nr">' + nr + '</div><div class="txt"><b>Kapitel ' + nr + ': ' + k.titel + '</b> ' + (fertig ? '✔' : '') +
+      '<br><small>' + ORTE[k.ort].name + (k.bike ? ' · 🏍️ Verfolgungsjagd' : '') + ' · Schwierigkeit ' + '★'.repeat(k.mul) + '</small><br>' + (frei ? k.teaser : '🔒 Erst Kapitel ' + (nr - 1) + ' schaffen.') + '</div>';
+    if (frei) { const b = document.createElement('button'); b.className = 'btn' + (fertig ? ' ghost' : ''); b.textContent = fertig ? '↻ Nochmal' : '▶ Spielen'; b.onclick = () => storyStarten(nr); d.appendChild(b); }
+    box.appendChild(d);
+  });
+  const d = document.createElement('div'); d.className = 'kapitel zu';
+  d.innerHTML = '<div class="nr">?</div><div class="txt"><b>Staffel 2: Phase 2</b><br>' + (st.fertig >= KAPITEL.length ? 'Ihr habt das Tutorial bestanden. Die nächste Staffel kommt bald …' : 'Schafft zuerst Staffel 1.') + '</div>';
+  box.appendChild(d);
+}
 
 /* =========================================================
    AGENTEN-PASS, AUFTRÄGE, KISTEN, GARDEROBE
@@ -1465,6 +1803,7 @@ $('kisteZu').onclick = () => { $('kisteAuf').hidden = true; renderMenu(); };
 let menuTab = 'einsatz';
 document.querySelectorAll('.tab').forEach(b => b.onclick = () => { menuTab = b.dataset.tab; renderMenu(); });
 function renderExtras() {
+  renderStory();
   const p = passStand(), auftr = auftraegeStand();
   document.querySelectorAll('.tab').forEach(b => {
     b.setAttribute('aria-selected', b.dataset.tab === menuTab);
