@@ -458,7 +458,7 @@ const DAILY_MISSION = 3;
 
 /* ---------- Spielstand ---------- */
 const SAVE_KEY = 'cl_save';
-const DEF = { skins: [], skin: {}, kisten: 1, pass: null, auftr: null, woche: null, coins: 0, agenten: ['matteo', 'timo'], agent: 'matteo', up: {}, best: 0, daily: { day: '', best: 0 }, muted: false, runs: 0, rank: 1, rxp: 0, maxMission: 1, mission: 1, fusionen: [] };
+const DEF = { skins: [], skin: {}, kisten: 1, pass: null, auftr: null, woche: null, coins: 0, agenten: Object.keys(AGENTEN), agent: 'matteo', up: {}, best: 0, daily: { day: '', best: 0 }, muted: false, runs: 0, rank: 1, rxp: 0, maxMission: 1, mission: 1, fusionen: [] };
 for (const k in META) DEF.up[k] = 0;
 let save = (() => {
   const d = JSON.parse(JSON.stringify(DEF));
