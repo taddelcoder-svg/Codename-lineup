@@ -88,7 +88,7 @@ let naechsteId = 1;
 const clients = new Set();
 const raeume = new Map();
 const MAX_SPIELER = 4;
-const AGENTEN = ['matteo', 'timo', 'omar', 'julian', 'felix', 'mo', 'damon', 'sinan'];
+const AGENTEN = ['matteo', 'timo', 'omar', 'julian', 'felix', 'mo', 'damon', 'sinan', 'leon', 'moritz', 'ecki', 'philipp', 'saro', 'matti', 'paul'];
 
 function neuerClient(sock) { const c = { id: naechsteId++, sock, name: 'Agent', agent: 'matteo', skin: '', up: {}, rank: 1, raum: null, lebt: true, offen: true }; clients.add(c); return c; }
 function senden(c, o) { if (!c.offen) return; try { c.sock.write(rahmen(1, Buffer.from(JSON.stringify(o)))); } catch (e) {} }

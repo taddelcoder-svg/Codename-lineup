@@ -347,12 +347,35 @@ const AGENTEN = {
     trait: 'Headbanger', traitTxt: 'Waffen laden 10 % schneller', ult: 'stromausfall', ultName: 'STROMAUSFALL', ultTxt: 'Alle Feinde 3 Sekunden gelähmt, Blitze schlagen ein.' },
   sinan: { name: 'Sinan', code: 'Der Kämpfer', col: '#16a34a', cost: 800, w: 'faeuste',
     look: { skin: '#e6b994', hair: '#16110e', style: 'stachel', suit: '#1f2a22', tie: null, shirt: '#16a34a', hut: 'stirnband', hutCol: '#e02020' },
-    trait: 'Kampfgeist', traitTxt: 'Jeder Treffer im Nahkampf heilt dich ein wenig', ult: 'tornado', ultName: 'TORNADO-KICK', ultTxt: 'Wirbelt 3,5 Sekunden und saugt Feinde an.' }
+    trait: 'Kampfgeist', traitTxt: 'Jeder Treffer im Nahkampf heilt dich ein wenig', ult: 'tornado', ultName: 'TORNADO-KICK', ultTxt: 'Wirbelt 3,5 Sekunden und saugt Feinde an.' },
+  leon: { name: 'Leon', code: 'Der Lange', col: '#e8707a', cost: 700, w: 'gewehr', scale: 1.12,
+    look: { skin: '#e8b896', hair: '#2a1a12', style: 'kurz', suit: '#3a3a44', shirt: '#e8707a', tie: '#111', brille: 'sonne' },
+    trait: 'Adlerauge', traitTxt: '+10 % Chance auf kritische Treffer', ult: 'praezision', ultName: 'PRÄZISIONSSCHUSS', ultTxt: 'Sechs Kopfschüsse auf die stärksten Gegner.' },
+  moritz: { name: 'Moritz', code: 'Der Physiker', col: '#4a6ad8', cost: 800, w: 'magnet',
+    look: { skin: '#f2c8b0', hair: '#e8c068', style: 'wuschel', suit: '#f4f4f4', shirt: '#4a6ad8', tie: '#ffd23f', brille: 'labor' },
+    trait: 'Formelsammlung', traitTxt: 'Ulti lädt 25 % schneller', ult: 'singularitaet', ultName: 'SINGULARITÄT', ultTxt: 'Ein riesiges schwarzes Loch saugt alles ein.' },
+  ecki: { name: 'Ecki', code: 'Der Sprinter', col: '#3ab0e8', cost: 850, w: 'bumerang',
+    look: { skin: '#f2c8b0', hair: '#7a5a3a', style: 'kurz', suit: '#1f6a9a', shirt: '#fff', tie: '#3ab0e8', hut: 'stirnband', hutCol: '#3ab0e8' },
+    trait: 'Muss mal!', traitTxt: '+20 % Tempo', ult: 'turbo', ultName: 'TURBO-SPÜLUNG', ultTxt: '5 Sekunden doppelt so schnell und unverwundbar – wer im Weg steht, fliegt.' },
+  philipp: { name: 'Philipp', code: 'Der Stratege', col: '#8a6ae8', cost: 900, w: 'laser',
+    look: { skin: '#e2b48c', hair: '#241812', style: 'scheitel', suit: '#2a2440', shirt: '#fff', tie: '#8a6ae8', brille: 'sonne' },
+    trait: 'Heimlich gelernt', traitTxt: 'Beim Level-up 4 statt 3 Upgrades zur Auswahl', ult: 'lernen', ultName: 'ALLES GELERNT', ultTxt: '6 Sekunden feuern alle Waffen dreimal so schnell.' },
+  saro: { name: 'Saro', code: 'Der Goldgräber', col: '#e0a800', cost: 1000, w: 'muenzen',
+    look: { skin: '#c8946e', hair: '#24160e', style: 'locken', suit: '#1a1a1a', shirt: '#ffd23f', tie: '#ffd23f', brille: 'sonne' },
+    trait: 'Goldene Nase', traitTxt: '+30 % Geld nach jedem Einsatz', ult: 'goldrausch', ultName: 'GOLDRAUSCH', ultTxt: 'Ein Regen aus Goldbarren prasselt auf die Gegner.' },
+  matti: { name: 'Matti', code: 'Der Korbleger', col: '#2fae4a', cost: 1100, w: 'baelle', scale: 1.05,
+    look: { skin: '#f0c8ac', hair: '#a8824a', style: 'kurz', suit: '#1f7a3a', shirt: '#fff', tie: '#3ad84a', hut: 'cap', hutCol: '#3ad84a' },
+    trait: 'Wachstumsschub', traitTxt: '+4 maximale Leben bei jedem Upgrade', ult: 'dunk', ultName: 'SLAM DUNK', ultTxt: 'Riesensprung – die Landung haut alle um und betäubt sie.' },
+  paul: { name: 'Paul', code: 'Das Chamäleon', col: '#e0607a', cost: 1200, w: 'zunge',
+    look: { skin: '#f2cfb8', hair: '#3a2418', style: 'kurz', suit: '#2c2c36', shirt: '#f08a9a', tie: '#c8302a', hut: 'cap', hutCol: '#18181c' },
+    trait: 'Feinschmecker', traitTxt: 'Verbandskästen heilen doppelt, +20 % Sammelreichweite', ult: 'feuer', ultName: 'FEUERZUNGE', ultTxt: '3,5 Sekunden Feuer speien – nach extra scharfer Chili.' }
 };
 const WAFFEN = {
   pistole: { name: 'Dienstpistole', emo: '🔫' }, harpune: { name: 'Harpune', emo: '🔱' }, drohnen: { name: 'Wach-Drohnen', emo: '🛸' },
   gas: { name: 'Gasgranaten', emo: '🧪' }, schild: { name: 'Schockschild', emo: '🛡️' }, sterne: { name: 'Wurfsterne', emo: '✴️' },
-  taser: { name: 'E-Gitarre', emo: '🎸' }, faeuste: { name: 'Schlagring', emo: '👊' }
+  taser: { name: 'E-Gitarre', emo: '🎸' }, faeuste: { name: 'Schlagring', emo: '👊' },
+  gewehr: { name: 'Scharfschützengewehr', emo: '🔭' }, magnet: { name: 'Gravitationsgranate', emo: '🌌' }, bumerang: { name: 'Klobürsten-Bumerang', emo: '🪃' },
+  laser: { name: 'Laserpointer', emo: '🔦' }, muenzen: { name: 'Goldmünzen-Schrot', emo: '🪙' }, baelle: { name: 'Basketball', emo: '🏀' }, zunge: { name: 'Zungenpeitsche', emo: '👅' }
 };
 const PASS = {
   sneaker: { name: 'Sneaker', emo: '👟', txt: '+10 % Tempo' },
@@ -370,7 +393,14 @@ const EVO = {
   schild: { need: 'kevlar', name: 'Kraftfeld', emo: '🔰', txt: 'Gewaltige Schockwellen schleudern alles weg.' },
   sterne: { need: 'sneaker', name: 'Klingensturm', emo: '🌀', txt: '16 Klingen in alle Richtungen.' },
   taser: { need: 'kaffee', name: 'Gewitter-Solo', emo: '⚡', txt: 'Blitze springen über den halben Bildschirm.' },
-  faeuste: { need: 'kevlar', name: 'Eisenfaust', emo: '🦾', txt: 'Rundumschlag mit doppelter Reichweite.' }
+  faeuste: { need: 'kevlar', name: 'Eisenfaust', emo: '🦾', txt: 'Rundumschlag mit doppelter Reichweite.' },
+  gewehr: { need: 'munition', name: 'Railgun', emo: '⚡', txt: 'Ein Schuss durch den ganzen Bildschirm, doppelter Schaden.' },
+  magnet: { need: 'kaliber', name: 'Ereignishorizont', emo: '🕳️', txt: 'Riesige schwarze Löcher, die lange bleiben.' },
+  bumerang: { need: 'sneaker', name: 'Wirbelbürste', emo: '🌪️', txt: 'Vier Bumerangs in alle Richtungen.' },
+  laser: { need: 'kaffee', name: 'Todesstrahl', emo: '🔴', txt: 'Drei Laser gleichzeitig mit großer Reichweite.' },
+  muenzen: { need: 'funk', name: 'Goldkanone', emo: '💰', txt: 'Zwölf Münzen, die durch Gegner fliegen.' },
+  baelle: { need: 'kevlar', name: 'Allstar-Wurf', emo: '⭐', txt: 'Der Ball springt von Gegner zu Gegner und hört kaum auf.' },
+  zunge: { need: 'funk', name: 'Chamäleonzunge', emo: '🦎', txt: 'Drei lange Zungen auf einmal.' }
 };
 // Skins: Outfits, die über das Aussehen eines Agenten gelegt werden (Haut und Haare bleiben)
 const RARITAET = { g: { name: 'Gewöhnlich', col: '#7d8494', w: 50, dup: 50 }, s: { name: 'Selten', col: '#2f7bf6', w: 30, dup: 100 }, e: { name: 'Episch', col: '#a020c0', w: 15, dup: 200 }, l: { name: 'Legendär', col: '#e09a00', w: 5, dup: 400 } };
@@ -674,9 +704,9 @@ const mScaleFuer = n => 1 + 0.6 * (n - 1);
 const traitIs = id => G.agent === id;
 const areaMul = () => (1 + 0.12 * G.p.kaliber) * (traitIs('julian') ? 1.25 : 1);
 const dmgMul = () => (1 + 0.08 * G.up.dmg + G.rankB) * (1 + 0.12 * G.p.munition) * (G.ultMode === 'tarnkappe' ? 2 : 1);
-const speedNow = () => 175 * (1 + 0.05 * G.up.spd) * (1 + 0.1 * G.p.sneaker) * (traitIs('mo') ? 1.15 : 1) * (traitIs('felix') ? 0.9 : 1) * (G.ultMode === 'bulldozer' || G.ultMode === 'tarnkappe' ? 1.3 : 1) * (G.bike ? 1.9 : 1);
-const magnet = () => 95 * (1 + 0.2 * G.up.mag) * (1 + 0.3 * G.p.funk) * (traitIs('omar') ? 1.4 : 1);
-const cdMul = () => Math.pow(0.92, G.p.kaffee) * (traitIs('damon') ? 0.9 : 1);
+const speedNow = () => 175 * (1 + 0.05 * G.up.spd) * (1 + 0.1 * G.p.sneaker) * (traitIs('mo') ? 1.15 : 1) * (traitIs('felix') ? 0.9 : 1) * (traitIs('ecki') ? 1.2 : 1) * (G.ultMode === 'bulldozer' || G.ultMode === 'tarnkappe' ? 1.3 : G.ultMode === 'turbo' ? 2 : 1) * (G.bike ? 1.9 : 1);
+const magnet = () => 95 * (1 + 0.2 * G.up.mag) * (1 + 0.3 * G.p.funk) * (traitIs('omar') ? 1.4 : 1) * (traitIs('paul') ? 1.2 : 1);
+const cdMul = () => Math.pow(0.92, G.p.kaffee) * (traitIs('damon') ? 0.9 : 1) * (G.ultMode === 'lernen' ? 0.33 : 1);
 function banner(text, t) { G.banner = text; G.bannerT = t || 2; $('banner').textContent = text; $('banner').hidden = false; $('banner').style.animation = 'none'; void $('banner').offsetWidth; $('banner').style.animation = ''; }
 function fx(f) { G.FX.push(f); if (G.coop && !G.gast) G.FXneu.push(f); }
 function tx(t) { G.TX.push(t); if (G.coop && !G.gast) G.TXneu.push(t); }
@@ -724,7 +754,7 @@ function enemyShot(e, a, sp) { if (G.EB.length < 220) G.EB.push({ x: e.x, y: e.y
 function hurtE(e, d, kx, ky, nahkampf) {
   const g = G;
   if ((e.elite || e.t === 'boss' || e.t === 'mother') && traitIs('matteo')) d *= 1.25;
-  const krit = Math.random() < (traitIs('mo') ? 0.15 : 0.08); if (krit) d *= 2;
+  const krit = Math.random() < (traitIs('mo') ? 0.15 : traitIs('leon') ? 0.18 : 0.08); if (krit) d *= 2;
   e.hp -= d; e.fl = 0.08; if (kx && e.t !== 'mother') { e.kx += kx; e.ky += ky; }
   if (nahkampf && traitIs('sinan')) g.hp = Math.min(g.maxhp, g.hp + 0.6);
   if (g.TX.length < 45) tx({ x: e.x + (Math.random() - .5) * 10, y: e.y - e.r * 2.2, s: Math.round(d), t: 0.65, krit });
@@ -734,7 +764,7 @@ function hurtE(e, d, kx, ky, nahkampf) {
 }
 function killE(e) {
   const g = G, T = TYPES[e.t]; e.dead = true; g.kills++;
-  g.ulti = Math.min(100, g.ulti + (e.t === 'boss' ? 40 : e.elite ? 10 : 1.6) * (1 + 0.1 * g.up.ult));
+  g.ulti = Math.min(100, g.ulti + (e.t === 'boss' ? 40 : e.elite ? 10 : 1.6) * (1 + 0.1 * g.up.ult) * (traitIs('moritz') ? 1.25 : 1));
   const xp = T.xp * (e.elite ? 5 : 1);
   if (g.GM.length < 400) g.GM.push({ x: e.x, y: e.y, v: xp }); else gainXp(xp);
   if ((e.t === 'drift' || e.t === 'brute') && g.rs() < 0.02 && g.GM.length < 400) g.GM.push({ x: e.x + 10, y: e.y, v: 0, h: true });
@@ -809,6 +839,57 @@ function weaponsTick(dt) {
       g.cd[id] = (E ? 0.7 : 1.7 - 0.15 * L) * cm; const hit = new Set(), pts = [{ x: g.px, y: g.py - 30 }];
       for (let i = 0; i < (E ? 12 : 2 + L) && t; i++) { hit.add(t); pts.push({ x: t.x, y: t.y - t.r }); hurtE(t, (14 + 5 * L) * dm * (E ? 1.5 : 1)); t = nearest(t.x, t.y, E ? 220 : 150, hit); }
       fx({ k: 'blitz', pts, t: .16, T: .16, ev: E }); sfx('zap', 800, .12, 'sawtooth', .03, -500);
+    } else if (id === 'gewehr') {
+      const t = nearest(g.px, g.py, 850); if (!t) { g.cd[id] = .1; continue; }
+      g.cd[id] = (E ? 0.9 : 2.2 - 0.2 * L) * cm;
+      const a = Math.atan2(t.y - t.r - g.py + 30, t.x - g.px);
+      schuss({ art: 'gewehr', x: g.px + Math.cos(a) * 20, y: g.py - 30, vx: Math.cos(a) * 1100, vy: Math.sin(a) * 1100, d: (45 + 18 * L) * dm * (E ? 2 : 1), pierce: E ? 99 : (L >= 3) + (L >= 5), life: .9 });
+      g.muzzle = .08; knall('gewehr', .12, .2, 2500);
+    } else if (id === 'magnet') {
+      const t = nearest(g.px, g.py, 380); if (!t) { g.cd[id] = .1; continue; }
+      g.cd[id] = (E ? 2.4 : 4 - 0.35 * L) * cm;
+      g.GR.push({ o: g.id, x0: g.px, y0: g.py - 30, x1: t.x, y1: t.y, t: 0, T: .5, r: (60 + 8 * L) * am * (E ? 1.6 : 1), dauer: E ? 4 : 2.5 + .2 * L, d: (6 + 2 * L) * dm * (E ? 1.5 : 1), loch: true });
+      sfx('wurf', 300, .15, 'sine', .04, -150);
+    } else if (id === 'bumerang') {
+      const t = nearest(g.px, g.py, 420); if (!t) { g.cd[id] = .1; continue; }
+      g.cd[id] = (1.6 - 0.15 * L) * cm;
+      const n = E ? 4 : 1 + (L >= 3) + (L >= 5), base = Math.atan2(t.y - g.py, t.x - g.px);
+      for (let i = 0; i < n; i++) { const a = E ? base + i * 6.283 / n : base + (i - (n - 1) / 2) * 0.35; schuss({ art: 'bumerang', x: g.px, y: g.py - 26, vx: Math.cos(a) * 440, vy: Math.sin(a) * 440, d: (12 + 4 * L) * dm * (E ? 1.5 : 1), pierce: 99, life: 2.2, rueck: true, alter: 0 }); }
+      sfx('wusch', 700, .1, 'sine', .03, -300);
+    } else if (id === 'laser') {
+      const R = (E ? 420 : 260 + 20 * L) * am; g.cd[id] = .12;
+      const ziele = [], skip = new Set(); let t = nearest(g.px, g.py, R);
+      for (let i = 0; i < (E ? 3 : 1) && t; i++) { ziele.push(t); skip.add(t); t = nearest(g.px, g.py, R, skip); }
+      if (!ziele.length) continue;
+      for (const z of ziele) { fx({ k: 'laser', x: g.px + g.face * 22, y: g.py - 42, x2: z.x, y2: z.y - z.r, t: .12, T: .12, ev: E }); hurtE(z, (5 + 2 * L) * dm * (E ? 1.5 : 1)); }
+      sfx('laser', 1500, .05, 'sawtooth', .012);
+    } else if (id === 'muenzen') {
+      const t = nearest(g.px, g.py, 300); if (!t) { g.cd[id] = .1; continue; }
+      g.cd[id] = (1.1 - 0.08 * L) * cm;
+      const n = E ? 12 : 4 + L, base = Math.atan2(t.y - g.py, t.x - g.px);
+      for (let i = 0; i < n; i++) { const a = base + (Math.random() - .5) * (E ? 1.2 : .7), v = 480 + Math.random() * 120; schuss({ art: 'muenze', x: g.px, y: g.py - 28, vx: Math.cos(a) * v, vy: Math.sin(a) * v, d: (7 + 2 * L) * dm, pierce: E ? 1 : 0, life: E ? .6 : .45 }); }
+      knall('schrot', .1, .2, 1800);
+    } else if (id === 'baelle') {
+      const t = nearest(g.px, g.py, 450); if (!t) { g.cd[id] = .1; continue; }
+      g.cd[id] = (1.8 - 0.15 * L) * cm;
+      const a = Math.atan2(t.y - g.py, t.x - g.px);
+      schuss({ art: 'ball', x: g.px, y: g.py - 30, vx: Math.cos(a) * 460, vy: Math.sin(a) * 460, d: (14 + 5 * L) * dm * (E ? 1.5 : 1), life: 2.5, sprung: E ? 8 + L : 2 + L });
+      sfx('ball', 220, .1, 'square', .04, 100);
+    } else if (id === 'zunge') {
+      const R = (200 + 15 * L) * am * (E ? 1.4 : 1), t = nearest(g.px, g.py, R); if (!t) { g.cd[id] = .1; continue; }
+      g.cd[id] = (1.0 - 0.07 * L) * cm;
+      const base = Math.atan2(t.y - g.py, t.x - g.px), n = E ? 3 : 1;
+      for (let i = 0; i < n; i++) {
+        const a = base + (i - (n - 1) / 2) * .4, x0 = g.px, y0 = g.py - 30, x1 = x0 + Math.cos(a) * R, y1 = y0 + Math.sin(a) * R;
+        for (const e of g.E) {
+          if (e.dead) continue;
+          const ex = e.x - x0, ey = e.y - e.r - y0, k = Math.max(0, Math.min(1, (ex * (x1 - x0) + ey * (y1 - y0)) / (R * R)));
+          const dx = e.x - (x0 + (x1 - x0) * k), dy = e.y - e.r - (y0 + (y1 - y0) * k);
+          if (dx * dx + dy * dy < (e.r + 14) ** 2) hurtE(e, (16 + 6 * L) * dm, -Math.cos(a) * 160, -Math.sin(a) * 160, true);
+        }
+        fx({ k: 'zunge', x: x0 + Math.cos(a) * 14, y: y0, x2: x1, y2: y1, t: .2, T: .2 });
+      }
+      sfx('zunge', 400, .12, 'sine', .04, 300);
     } else if (id === 'faeuste') {
       const t = nearest(g.px, g.py, (E ? 200 : 130) * am); if (!t) { g.cd[id] = .1; continue; }
       g.cd[id] = (0.75 - 0.05 * L) * cm;
@@ -831,9 +912,10 @@ function objekteTick(dt) {
       r.r += (r.speed || 540) * dt;
       for (const e of g.E) { if (e.dead || r.hit.has(e)) continue; const d = Math.hypot(e.x - r.x, e.y - r.y); if (d < r.r + e.r) { r.hit.add(e); hurtE(e, r.d, (e.x - r.x) / (d || 1) * r.kb, (e.y - r.y) / (d || 1) * r.kb); } }
     }
-    for (const gr of g.GR) { if (von(gr) !== id) continue; gr.t += dt; if (gr.t >= gr.T) { gr.weg = true; g.POOL.push({ o: id, x: gr.x1, y: gr.y1, r: gr.r, t: gr.dauer, T: gr.dauer, d: gr.d, tick: 0 }); boom(gr.x1, gr.y1, 0.8); } }
+    for (const gr of g.GR) { if (von(gr) !== id) continue; gr.t += dt; if (gr.t >= gr.T) { gr.weg = true; g.POOL.push({ o: id, x: gr.x1, y: gr.y1, r: gr.r, t: gr.dauer, T: gr.dauer, d: gr.d, tick: 0, loch: gr.loch }); if (!gr.loch) boom(gr.x1, gr.y1, 0.8); } }
     for (const p of g.POOL) {
       if (von(p) !== id) continue;
+      if (p.loch) for (const e of g.E) { if (e.dead || e.t === 'mother') continue; const dx = p.x - e.x, dy = p.y - e.y, d = Math.hypot(dx, dy); if (d < p.r * 1.8 && d > 6) { const st = (p.stark || 140) * dt; e.x += dx / d * st; e.y += dy / d * st; } }
       p.t -= dt; p.tick -= dt;
       if (p.tick <= 0) { p.tick = .4; for (const e of g.E) if (!e.dead && (e.x - p.x) ** 2 + (e.y - p.y) ** 2 < (p.r + e.r) ** 2) hurtE(e, p.d); }
     }
@@ -842,9 +924,14 @@ function objekteTick(dt) {
       if (von(s) !== id) continue;
       if (s.jagd) { const t = nearest(s.x, s.y, 500); if (t) { const a = Math.atan2(t.y - t.r - s.y, t.x - s.x), cur = Math.atan2(s.vy, s.vx); let da = Math.atan2(Math.sin(a - cur), Math.cos(a - cur)); const na = cur + Math.max(-6 * dt, Math.min(6 * dt, da)); s.vx = Math.cos(na) * 420; s.vy = Math.sin(na) * 420; } }
       s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt; s.rot = (s.rot || 0) + dt * 18;
+      if (s.rueck) { s.alter += dt; if (s.alter > .55) { if (!s.zurueck) { s.zurueck = true; s.hit = new Set(); } const dx = g.px - s.x, dy = g.py - 26 - s.y, d = Math.hypot(dx, dy) || 1; s.vx = dx / d * 540; s.vy = dy / d * 540; if (d < 26) s.life = 0; } }
       for (const e of g.E) {
         if (e.dead || s.hit.has(e)) continue; const dx = e.x - s.x, dy = e.y - e.r - s.y, rr = e.r + (s.art === 'harpune' ? 10 : 6);
-        if (dx * dx + dy * dy < rr * rr) { s.hit.add(e); hurtE(e, s.d, s.vx * .12, s.vy * .12); if (--s.pierce < 0) { s.life = 0; break; } }
+        if (dx * dx + dy * dy < rr * rr) {
+          s.hit.add(e); hurtE(e, s.d, s.vx * .12, s.vy * .12);
+          if (s.sprung > 0) { s.sprung--; const n = nearest(e.x, e.y, 320, s.hit); if (n) { const a = Math.atan2(n.y - n.r - s.y, n.x - s.x); s.vx = Math.cos(a) * 520; s.vy = Math.sin(a) * 520; s.life = Math.max(s.life, .8); sfx('ball', 260, .06, 'square', .03, 80); } else s.life = 0; break; }
+          if (--s.pierce < 0) { s.life = 0; break; }
+        }
       }
     }
   });
@@ -885,6 +972,21 @@ function ultiAus(u) {
   else if (u === 'bulldozer') { g.ultMode = 'bulldozer'; g.ultT = 5; }
   else if (u === 'tarnkappe') { g.ultMode = 'tarnkappe'; g.ultT = 5; }
   else if (u === 'tornado') { g.ultMode = 'tornado'; g.ultT = 3.5; }
+  else if (u === 'praezision') {
+    const ziele = g.E.filter(e => (e.x - g.px) ** 2 + (e.y - g.py) ** 2 < 900 * 900).sort((a, b) => b.hp - a.hp).slice(0, 6);
+    for (const e of ziele) { fx({ k: 'laser', x: g.px, y: g.py - 42, x2: e.x, y2: e.y - e.r, t: .35, T: .35, rot: true }); hurtE(e, 400 * dm); }
+    wort(g.px, g.py - 90, 'HEADSHOT!', true); knall('gewehr', .3, .35, 1500);
+  }
+  else if (u === 'singularitaet') { g.POOL.push({ o: g.id, x: g.px, y: g.py, r: 200 * am, t: 4, T: 4, d: 40 * dm, tick: 0, loch: true, stark: 320 }); wort(g.px, g.py - 100, 'WUUUSCH!', true); }
+  else if (u === 'turbo') { g.ultMode = 'turbo'; g.ultT = 5; wort(g.px, g.py - 90, 'SPÜL!', true); }
+  else if (u === 'lernen') { g.ultMode = 'lernen'; g.ultT = 6; wort(g.px, g.py - 90, 'BÄM!', true); }
+  else if (u === 'goldrausch') { for (let i = 0; i < 24; i++) { const a = Math.random() * 6.283, d = Math.random() * 380; g.STR.push({ o: g.id, x: g.px + Math.cos(a) * d, y: g.py + Math.sin(a) * d, t: .25 + i * .08, r: 70 * am, d: 90 * dm, gold: true }); } wort(g.px, g.py - 100, 'KA-CHING!', true); }
+  else if (u === 'dunk') {
+    g.RG.push({ o: g.id, x: g.px, y: g.py, r: 0, max: 380 * am, d: 120 * dm, kb: 700, hit: new Set(), col: '#ff7a1a', welle: true });
+    for (const e of g.E) if ((e.x - g.px) ** 2 + (e.y - g.py) ** 2 < (300 * am) ** 2) e.stun = 2;
+    boom(g.px, g.py, 3); wort(g.px, g.py - 100, 'DUNK!', true); if (ich()) g.shake = .8;
+  }
+  else if (u === 'feuer') { g.ultMode = 'feuer'; g.ultT = 3.5; g.ultTick = 0; wort(g.px, g.py - 90, 'SCHARF!', true); }
   else if (u === 'stromausfall') {
     for (const e of g.E) if (Math.abs(e.x - g.px) < W / 2 + 40 && Math.abs(e.y - g.py) < H / 2 + 40) e.stun = 3;
     const ziele = g.E.slice().sort((a, b) => ((a.x - g.px) ** 2 + (a.y - g.py) ** 2) - ((b.x - g.px) ** 2 + (b.y - g.py) ** 2)).slice(0, 12);
@@ -894,7 +996,7 @@ function ultiAus(u) {
 }
 
 function hitPlayer(d) {
-  const g = G; if (g.down || g.inv > 0 || g.ultMode === 'bulldozer') return;
+  const g = G; if (g.down || g.inv > 0 || g.ultMode === 'bulldozer' || g.ultMode === 'turbo') return;
   if (traitIs('mo') && Math.random() < .15) { if (g.TX.length < 45) tx({ x: g.px, y: g.py - 80, s: 'AUSGEWICHEN', t: .6, info: true }); g.inv = .25; return; }
   g.hp -= d * (traitIs('felix') ? .75 : 1) * (g.bike ? .6 : 1); g.inv = 0.5;
   if (ich()) { g.flash = .18; g.shake = Math.max(g.shake, .2); knall('aua', .15, .3, 400); }
@@ -927,6 +1029,14 @@ function spielerTick(dt) {
   if (g.up.regen) g.hp = Math.min(g.maxhp, g.hp + 0.4 * g.up.regen * dt);
   if (g.ultMode) { g.ultT -= dt; if (g.ultT <= 0) g.ultMode = null; }
   if (g.ultMode === 'tornado') { g.ultTick -= dt; if (g.ultTick <= 0) { g.ultTick = .2; for (const e of g.E) { const dx = g.px - e.x, dy = g.py - e.y, d = Math.hypot(dx, dy); if (d < 160 * areaMul()) hurtE(e, 35 * dmgMul(), 0, 0, true); else if (d < 280) { e.kx += dx / d * 120; e.ky += dy / d * 120; } } } }
+  if (g.ultMode === 'feuer') {
+    g.ultTick -= dt;
+    if (g.ultTick <= 0) {
+      g.ultTick = .15; const R = 260 * areaMul();
+      for (const e of g.E) { const dx = e.x - g.px, dy = e.y - g.py, d = Math.hypot(dx, dy); if (d > R) continue; let da = Math.atan2(dy, dx) - g.ang; da = Math.atan2(Math.sin(da), Math.cos(da)); if (Math.abs(da) < .55) hurtE(e, 30 * dmgMul(), dx / (d || 1) * 80, dy / (d || 1) * 80); }
+      fx({ k: 'feuer', x: g.px + Math.cos(g.ang) * 16, y: g.py - 40, a: g.ang, r: R, t: .2, T: .2 }); knall('feuer', .15, .12, 600);
+    }
+  }
   weaponsTick(dt);
 }
 function update(dt) {
@@ -971,7 +1081,7 @@ function update(dt) {
     if (d > 950 && e.t !== 'mother') { e.x = ziel.px - ux * 450; e.y = ziel.py - uy * 450; }
     if (ziel.down || d >= e.r + 16) continue;
     alsSpieler(ziel, () => {
-      if (g.ultMode === 'bulldozer' && g.t - e.rh > .3) { e.rh = g.t; hurtE(e, 70 * dmgMul(), -ux * 500, -uy * 500); }
+      if ((g.ultMode === 'bulldozer' || g.ultMode === 'turbo') && g.t - e.rh > .3) { e.rh = g.t; hurtE(e, 70 * dmgMul(), -ux * 500, -uy * 500); }
       else if (g.bike && Math.hypot(g.vx, g.vy) > 160 && g.t - e.rh > .35) { e.rh = g.t; hurtE(e, 45 * dmgMul() * Math.hypot(g.vx, g.vy) / speedNow(), -ux * 420, -uy * 420); }
       if (e.stun <= 0 && g.ultMode !== 'tarnkappe') hitPlayer(T.dmg * g.sm.dmg);
     });
@@ -990,7 +1100,7 @@ function update(dt) {
       if (m.got) continue;
       const dx = g.px - m.x, dy = g.py - m.y, d = Math.hypot(dx, dy);
       if ((d < mg && !m.c) || (m.fly === g.id) || (m.c && d < 70)) { m.fly = g.id; const s = 280 + (mg - Math.min(d, mg)) * 2; m.x += dx / (d || 1) * s * dt; m.y += dy / (d || 1) * s * dt; }
-      if (d < 18) { m.got = true; if (m.c) koffer.push(pl); else if (m.h) { g.hp = Math.min(g.maxhp, g.hp + g.maxhp * 0.2); if (ich()) sfx('heal', 500, .15, 'sine', .05, 400); } else { gainXp(m.v); if (ich()) sfx('gem', 900 + Math.min(g.lvl, 20) * 15, .05, 'sine', .03); } }
+      if (d < 18) { m.got = true; if (m.c) koffer.push(pl); else if (m.h) { g.hp = Math.min(g.maxhp, g.hp + g.maxhp * (traitIs('paul') ? 0.4 : 0.2)); if (ich()) sfx('heal', 500, .15, 'sine', .05, 400); } else { gainXp(m.v); if (ich()) sfx('gem', 900 + Math.min(g.lvl, 20) * 15, .05, 'sine', .03); } }
     }
   });
   g.GM = g.GM.filter(m => !m.got);
@@ -1047,6 +1157,7 @@ function upgradePool(nurBesitz) {
 }
 function applyUp(o) {
   const g = G;
+  if (traitIs('matti')) { g.maxhp += 4; g.hp += 4; }
   if (o.k === 'w') g.w[o.id] = (g.w[o.id] || 0) + 1;
   else if (o.k === 'p') { g.p[o.id]++; if (o.id === 'kevlar') { g.maxhp += 25; g.hp = g.maxhp; } }
   else g.hp = g.maxhp;
@@ -1055,7 +1166,7 @@ const HEAL = { k: 'h', name: 'Verbandskasten', emo: '🩹', txt: 'Heilt dich vol
 function shuffle(a, r) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function karte(o, cls) { return '<span class="e">' + o.emo + '</span><b class="' + (cls || '') + '">' + o.name + '</b><small>' + o.txt + '</small>'; }
 const kurzKarte = o => ({ name: o.name, emo: o.emo, txt: o.txt, neu: !!o.neu, fusion: !!o.fusion });
-function dreiOptionen() { const p = shuffle(upgradePool(false), G.ru).slice(0, 3); return p.length ? p : [HEAL]; }
+function dreiOptionen() { const p = shuffle(upgradePool(false), G.ru).slice(0, traitIs('philipp') ? 4 : 3); return p.length ? p : [HEAL]; }
 // Zeigt die Upgrade-Wahl; beiWahl(i) und beiReroll() entscheiden, was passiert
 function zeigeLevelWahl(opts, rr, beiWahl, beiReroll) {
   const box = $('picks'); box.innerHTML = ''; box.hidden = false; $('lvlWarten').hidden = true;
@@ -1138,7 +1249,7 @@ function finish(win) {
   state = 'end'; $('hud').hidden = true; $('banner').hidden = true; $('cutin').hidden = true; $('kofferToast').hidden = true; $('lvl').hidden = true; $('pause').hidden = true;
   const lohn = g.sm.lohn;
   const score = Math.round((g.kills * 10 + Math.floor(g.t) * 3 + g.bosses * 500 + (win ? 3000 : 0)) * lohn);
-  let coins = Math.floor((g.kills / 8 + g.t / 5 + g.bosses * 25 + (win ? 100 : 0)) * lohn * (1 + 0.1 * save.up.gold)), bonus = 0;
+  let coins = Math.floor((g.kills / 8 + g.t / 5 + g.bosses * 25 + (win ? 100 : 0)) * lohn * (1 + 0.1 * save.up.gold) * (g.me && g.me.agent === 'saro' ? 1.3 : 1)), bonus = 0;
   const day = heute();
   if (g.daily && save.daily.day !== day) { bonus = 40; coins += bonus; save.daily = { day, best: 0 }; }
   let dBest = false; if (g.daily && score > save.daily.best) { save.daily.best = score; dBest = true; }
@@ -1191,9 +1302,9 @@ function draw() {
   // Straßenmarkierung bei Verfolgungsjagd
   if (g.bike) { ctx.fillStyle = ort.strich; for (let x = Math.floor(cx / 120) * 120; x < cx + W; x += 120) for (const yy of [-300, 300]) { const by = Math.round(g.py / 600) * 600 + yy; ctx.fillRect(x, by, 60, 8); } }
   // Giftpfützen
-  for (const p of g.POOL) { if (!sicht(p.x, p.y, p.r)) continue; const a = Math.min(1, p.t / .5) * .55; ctx.fillStyle = 'rgba(80,220,90,' + a + ')'; ctx.strokeStyle = 'rgba(17,17,17,' + a + ')'; ctx.lineWidth = 3; ctx.beginPath(); for (let i = 0; i <= 12; i++) { const an = i * .5236, rr = p.r * (.88 + .12 * Math.sin(g.t * 3 + i * 1.7)); ctx.lineTo(p.x + Math.cos(an) * rr, p.y + Math.sin(an) * rr * .6); } ctx.fill(); ctx.stroke(); ctx.fillStyle = 'rgba(200,255,200,' + a + ')'; for (let i = 0; i < 3; i++) { const bx = p.x + Math.sin(g.t * 2 + i * 2) * p.r * .5, by = p.y + Math.cos(g.t * 1.6 + i) * p.r * .25; ctx.beginPath(); ctx.arc(bx, by, 4, 0, 6.283); ctx.fill(); } }
+  for (const p of g.POOL) { if (!sicht(p.x, p.y, p.r * 1.8)) continue; if (p.loch) { lochMalen(p); continue; } const a = Math.min(1, p.t / .5) * .55; ctx.fillStyle = 'rgba(80,220,90,' + a + ')'; ctx.strokeStyle = 'rgba(17,17,17,' + a + ')'; ctx.lineWidth = 3; ctx.beginPath(); for (let i = 0; i <= 12; i++) { const an = i * .5236, rr = p.r * (.88 + .12 * Math.sin(g.t * 3 + i * 1.7)); ctx.lineTo(p.x + Math.cos(an) * rr, p.y + Math.sin(an) * rr * .6); } ctx.fill(); ctx.stroke(); ctx.fillStyle = 'rgba(200,255,200,' + a + ')'; for (let i = 0; i < 3; i++) { const bx = p.x + Math.sin(g.t * 2 + i * 2) * p.r * .5, by = p.y + Math.cos(g.t * 1.6 + i) * p.r * .25; ctx.beginPath(); ctx.arc(bx, by, 4, 0, 6.283); ctx.fill(); } }
   // Luftschlag-Ziele
-  for (const s of g.STR) { ctx.strokeStyle = '#ff2020'; ctx.lineWidth = 3; ctx.setLineDash([8, 6]); ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r, s.r * .6, 0, 0, 6.283); ctx.stroke(); ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(s.x - 14, s.y); ctx.lineTo(s.x + 14, s.y); ctx.moveTo(s.x, s.y - 10); ctx.lineTo(s.x, s.y + 10); ctx.stroke(); }
+  for (const s of g.STR) { ctx.strokeStyle = s.gold ? '#ffb800' : '#ff2020'; ctx.lineWidth = 3; ctx.setLineDash([8, 6]); ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r, s.r * .6, 0, 0, 6.283); ctx.stroke(); ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(s.x - 14, s.y); ctx.lineTo(s.x + 14, s.y); ctx.moveTo(s.x, s.y - 10); ctx.lineTo(s.x, s.y + 10); ctx.stroke(); }
   // Wellen (am Boden)
   for (const r of g.RG) { const k = 1 - r.r / r.max; ctx.strokeStyle = OUT; ctx.globalAlpha = k; ctx.lineWidth = r.welle ? 16 : 9; ctx.beginPath(); ctx.ellipse(r.x, r.y, r.r, r.r * .62, 0, 0, 6.283); ctx.stroke(); ctx.strokeStyle = r.col; ctx.lineWidth = r.welle ? 10 : 5; ctx.stroke(); ctx.globalAlpha = 1; }
 
@@ -1222,6 +1333,10 @@ function draw() {
     const a = Math.atan2(s.vy, s.vx); ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(a); ctx.strokeStyle = OUT; ctx.lineWidth = 2.5;
     if (s.art === 'harpune') { const L = s.gross ? 46 : 34; ctx.fillStyle = '#b8c0cc'; ctx.fillRect(-L, -2.5, L, 5); ctx.strokeRect(-L, -2.5, L, 5); ctx.beginPath(); ctx.moveTo(0, -7); ctx.lineTo(14, 0); ctx.lineTo(0, 7); ctx.closePath(); ctx.fillStyle = '#e8e8e8'; ctx.fill(); ctx.stroke(); }
     else if (s.art === 'stern') { ctx.rotate(s.rot); ctx.beginPath(); for (let i = 0; i < 8; i++) { const r = i % 2 ? 4 : 11, an = i * .785; ctx.lineTo(Math.cos(an) * r, Math.sin(an) * r); } ctx.closePath(); ctx.fillStyle = '#cfd6e0'; ctx.fill(); ctx.stroke(); }
+    else if (s.art === 'gewehr') { ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-44, 0); ctx.lineTo(6, 0); ctx.stroke(); ctx.strokeStyle = '#ffe066'; ctx.lineWidth = 3; ctx.stroke(); }
+    else if (s.art === 'bumerang') { ctx.rotate(s.rot); ctx.fillStyle = '#8a5a2a'; ctx.fillRect(-13, -3, 26, 6); ctx.strokeRect(-13, -3, 26, 6); ctx.fillStyle = '#3ab0e8'; ctx.beginPath(); ctx.arc(13, 0, 7, 0, 6.283); ctx.fill(); ctx.stroke(); }
+    else if (s.art === 'muenze') { ctx.fillStyle = '#ffd23f'; ctx.beginPath(); ctx.arc(0, 0, 6, 0, 6.283); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#fff6c9'; ctx.fillRect(-2, -3, 2, 4); }
+    else if (s.art === 'ball') { ctx.rotate(s.rot * .5); ctx.fillStyle = '#ff7a1a'; ctx.beginPath(); ctx.arc(0, 0, 10, 0, 6.283); ctx.fill(); ctx.stroke(); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(-10, 0); ctx.lineTo(10, 0); ctx.moveTo(0, -10); ctx.lineTo(0, 10); ctx.stroke(); }
     else if (s.art === 'drohne') { ctx.fillStyle = '#ffb800'; ctx.beginPath(); ctx.ellipse(0, 0, 10, 6, 0, 0, 6.283); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#ff2020'; ctx.beginPath(); ctx.arc(4, 0, 2.5, 0, 6.283); ctx.fill(); }
     else { ctx.fillStyle = s.gold ? '#ffd23f' : '#fff36a'; ctx.beginPath(); ctx.roundRect(-14, -3.5, 20, 7, 3.5); ctx.fill(); ctx.stroke(); ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.fillRect(-28, -1.5, 12, 3); }
     ctx.restore();
@@ -1245,6 +1360,16 @@ function draw() {
   if (g.flash > 0) { ctx.fillStyle = 'rgba(255,40,40,' + g.flash * 1.6 + ')'; ctx.fillRect(0, 0, W, H); }
   if (g.wflash > 0) { ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, g.wflash * 2.5) + ')'; ctx.fillRect(0, 0, W, H); }
   if (joy.on) { ctx.strokeStyle = 'rgba(17,17,17,.5)'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(joy.ox, joy.oy, 50, 0, 6.283); ctx.stroke(); ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.beginPath(); ctx.arc(joy.ox + joy.dx * 50, joy.oy + joy.dy * 50, 20, 0, 6.283); ctx.fill(); ctx.stroke(); }
+}
+// Schwarzes Loch: dunkler Wirbel mit kreisenden Ringen
+function lochMalen(p) {
+  const g = G; ctx.save(); ctx.globalAlpha = Math.min(1, p.t / .5); ctx.translate(p.x, p.y); ctx.scale(1, .62);
+  const gr = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r); gr.addColorStop(0, '#000'); gr.addColorStop(.5, '#2a0a4a'); gr.addColorStop(1, 'rgba(120,60,220,0)');
+  ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(0, 0, p.r, 0, 6.283); ctx.fill();
+  ctx.strokeStyle = 'rgba(200,160,255,.85)'; ctx.lineWidth = 3;
+  for (let i = 0; i < 4; i++) { const a = g.t * (3 - i * .5) + i; ctx.beginPath(); ctx.arc(0, 0, p.r * (.3 + .17 * i), a, a + 2.2); ctx.stroke(); }
+  ctx.strokeStyle = OUT; ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(0, 0, p.r * .18, 0, 6.283); ctx.fill(); ctx.stroke();
+  ctx.restore();
 }
 function schatten(x, y, r) { ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.beginPath(); ctx.ellipse(x, y, r, r * .35, 0, 0, 6.283); ctx.fill(); }
 function beuteMalen(m) {
@@ -1348,6 +1473,18 @@ function fxMalen(f) {
     ctx.globalAlpha = k; ctx.lineWidth = 12; ctx.strokeStyle = OUT;
     const a0 = f.rund ? 0 : f.a - .9, a1 = f.rund ? 6.283 : f.a + .9;
     ctx.beginPath(); ctx.ellipse(f.x, f.y, f.r, f.r * .7, 0, a0, a1); ctx.stroke(); ctx.lineWidth = 7; ctx.strokeStyle = '#fff'; ctx.stroke(); ctx.globalAlpha = 1;
+  } else if (f.k === 'laser') {
+    ctx.globalAlpha = Math.min(1, k * 2); ctx.lineCap = 'round';
+    for (const [w, c] of [[f.ev || f.rot ? 9 : 6, OUT], [f.ev || f.rot ? 5 : 3, f.rot ? '#ff3b3b' : '#ff4df0'], [1.5, '#fff']]) { ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(f.x2, f.y2); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+  } else if (f.k === 'zunge') {
+    const p = Math.sin((1 - k) * Math.PI), x2 = f.x + (f.x2 - f.x) * p, y2 = f.y + (f.y2 - f.y) * p;
+    ctx.lineCap = 'round'; ctx.strokeStyle = OUT; ctx.lineWidth = 11; ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(x2, y2); ctx.stroke(); ctx.strokeStyle = '#f08a9a'; ctx.lineWidth = 6; ctx.stroke();
+    ctx.lineWidth = 3; ctx.strokeStyle = OUT; ctx.fillStyle = '#f08a9a'; ctx.beginPath(); ctx.arc(x2, y2, 8, 0, 6.283); ctx.fill(); ctx.stroke();
+  } else if (f.k === 'feuer') {
+    ctx.globalAlpha = Math.min(1, k * 2); ctx.lineWidth = 3; ctx.strokeStyle = OUT;
+    for (const [sk, c] of [[1, '#ff7a1a'], [.65, '#ffd23f'], [.35, '#fff6c9']]) { ctx.fillStyle = c; ctx.beginPath(); ctx.moveTo(f.x, f.y); for (let i = 0; i <= 8; i++) { const an = f.a - .55 * sk + 1.1 * sk * i / 8, rr = f.r * sk * (.85 + Math.random() * .2); ctx.lineTo(f.x + Math.cos(an) * rr, f.y + Math.sin(an) * rr * .7); } ctx.closePath(); ctx.fill(); if (sk === 1) ctx.stroke(); }
+    ctx.globalAlpha = 1;
   } else if (f.k === 'staub') {
     ctx.fillStyle = 'rgba(220,220,220,' + k * .7 + ')'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(f.x, f.y - (1 - k) * 10, 6 + (1 - k) * 10, 0, 6.283); ctx.fill();
   }
@@ -2025,7 +2162,7 @@ function gastWeg(id) {
   const pl = g.P[i]; g.P.splice(i, 1); banner('👋 ' + pl.name.toUpperCase() + ' IST WEG');
   if (g.lvlRunde) { g.lvlRunde.offen.delete(id); lvlRundeFertig(); }
 }
-const TYP_L = Object.keys(TYPES), ART_L = ['kugel', 'harpune', 'stern', 'drohne'], ULT_L = [null, 'bulldozer', 'tarnkappe', 'tornado'];
+const TYP_L = Object.keys(TYPES), ART_L = ['kugel', 'harpune', 'stern', 'drohne', 'gewehr', 'bumerang', 'muenze', 'ball'], ULT_L = [null, 'bulldozer', 'tarnkappe', 'tornado', 'turbo', 'lernen', 'feuer'];
 const r0 = v => Math.round(v), r2 = v => Math.round(v * 100) / 100;
 function sendeSpielstand() {
   const g = G; sync();
@@ -2041,9 +2178,9 @@ function sendeSpielstand() {
       S: g.S.filter(s => da(s.x, s.y)).map(s => [ART_L.indexOf(s.art), r0(s.x), r0(s.y), r0(s.vx), r0(s.vy), (s.gold ? 1 : 0) | (s.gross ? 2 : 0)]),
       EB: g.EB.filter(b => da(b.x, b.y)).map(b => [r0(b.x), r0(b.y), r0(b.vx), r0(b.vy)]),
       GM: g.GM.filter(m => da(m.x, m.y)).map(m => [r0(m.x), r0(m.y), m.c ? 2 : m.h ? 1 : m.v >= 5 ? 3 : 0]),
-      PO: g.POOL.filter(q => da(q.x, q.y)).map(q => [r0(q.x), r0(q.y), r0(q.r), r2(q.t)]),
+      PO: g.POOL.filter(q => da(q.x, q.y)).map(q => [r0(q.x), r0(q.y), r0(q.r), r2(q.t), q.loch ? 1 : 0]),
       GR: g.GR.map(q => [r0(q.x0), r0(q.y0), r0(q.x1), r0(q.y1), r2(q.t / q.T)]),
-      ST: g.STR.map(q => [r0(q.x), r0(q.y), r0(q.r)]),
+      ST: g.STR.map(q => [r0(q.x), r0(q.y), r0(q.r), q.gold ? 1 : 0]),
       RG: g.RG.map(q => [r0(q.x), r0(q.y), r0(q.r), r0(q.max), q.col, q.welle ? 1 : 0]),
       FX: fxNeu.filter(f => f.k !== 'staub' && (f.pts ? da(f.pts[f.pts.length - 1].x, f.pts[f.pts.length - 1].y) : da(f.x, f.y))).slice(-60).map(f => { const c = Object.assign({}, f); delete c.t; return c; }),
       TX: txNeu.filter(t => da(t.x, t.y)).slice(-30).map(t => [r0(t.x), r0(t.y), t.s, t.krit ? 1 : t.info ? 2 : 0]) });
@@ -2128,9 +2265,9 @@ function gastWelt() {
   g.S = d.S.map(s => ({ art: ART_L[s[0]] || 'kugel', x: s[1] + s[3] * dtS, y: s[2] + s[4] * dtS, vx: s[3], vy: s[4], gold: !!(s[5] & 1), gross: !!(s[5] & 2), rot: g.t * 18 }));
   g.EB = d.EB.map(b => ({ x: b[0] + b[2] * dtS, y: b[1] + b[3] * dtS }));
   g.GM = d.GM.map(m => ({ x: m[0], y: m[1], c: m[2] === 2, h: m[2] === 1, v: m[2] === 3 ? 5 : 1 }));
-  g.POOL = d.PO.map(q => ({ x: q[0], y: q[1], r: q[2], t: q[3] }));
+  g.POOL = d.PO.map(q => ({ x: q[0], y: q[1], r: q[2], t: q[3], loch: !!q[4] }));
   g.GR = d.GR.map(q => ({ x0: q[0], y0: q[1], x1: q[2], y1: q[3], t: q[4], T: 1 }));
-  g.STR = d.ST.map(q => ({ x: q[0], y: q[1], r: q[2] }));
+  g.STR = d.ST.map(q => ({ x: q[0], y: q[1], r: q[2], gold: !!q[3] }));
   g.RG = d.RG.map(q => ({ x: q[0], y: q[1], r: q[2], max: q[3], col: q[4], welle: !!q[5] }));
 }
 koopZeigen();
